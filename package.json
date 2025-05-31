@@ -1,0 +1,20 @@
+{
+  "name": "server-epayco",
+  "version": "1.0.0",
+  "description": "\"Proyecto Servidor Empresa ePayco\"",
+  "homepage": "https://github.com/prequena-84/Server-ePayco#readme",
+  "bugs": {
+    "url": "https://github.com/prequena-84/Server-ePayco/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prequena-84/Server-ePayco.git"
+  },
+  "license": "ISC",
+  "author": "Pedro Juan Requena Rondon",
+  "type": "commonjs",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
