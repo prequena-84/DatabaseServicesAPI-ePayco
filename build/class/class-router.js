@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
-class routerInstance {
+class routerInstancia {
     constructor() {
     }
     Servidor() {
@@ -44,4 +44,4 @@ class routerInstance {
         return (0, express_1.Router)();
     }
 }
-exports.default = routerInstance;
+exports.default = routerInstancia;

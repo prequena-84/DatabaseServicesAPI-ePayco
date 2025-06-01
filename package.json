@@ -18,7 +18,7 @@
     "build": "tsc",
     "server": "node build/app.js",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "generateToken": "node -e \"console.log(require('crypto').randomBytes(64).toString('hex'))\""
+    "generateToken": "node -e \"console.log(require('crypto').randomBytes(3).toString('hex'))\""
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

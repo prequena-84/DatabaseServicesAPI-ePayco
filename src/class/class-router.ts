@@ -1,6 +1,6 @@
 import express, { Router, Express } from 'express'
 
-export default class routerInstance {
+export default class routerInstancia {
     constructor(){
     }
 

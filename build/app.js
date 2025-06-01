@@ -12,8 +12,9 @@ const CS = new class_router_1.default();
 const servidor = CS.Servidor();
 servidor.use((0, cors_1.default)());
 servidor.all('/', (_req, res) => {
-    res.send('Bienvenido a la API de Servicios de Optica ARANA');
+    res.send('Bienvenido a la API de Servicios de ePayco');
 });
+// Definicion de las rutas de las consultas entre APIs
 /*servidor.use( '/customer', CUSTOMER )
 servidor.use( '/prescription', PRESCRIPTION )
 servidor.use( '/user', USER )
