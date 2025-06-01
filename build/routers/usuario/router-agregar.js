@@ -12,23 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = usuarioAdd;
-const config_mongo_1 = require("../../config/config-mongo");
-const usuario_1 = __importDefault(require("../../db/models/usuario"));
-function usuarioAdd(datausuario) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield (0, config_mongo_1.connectDB)();
-            return yield usuario_1.default.createInstance(datausuario);
-        }
-        catch (err) {
-            return {
-                data: null,
-                message: `Hubo un Error en el registro del Usuario: ${err}`,
-            };
-        }
-        finally {
-            config_mongo_1.mongoose.connection.close();
-        }
-    });
-}
+const body_parser_1 = __importDefault(require("body-parser"));
+const class_router_1 = __importDefault(require("../../class/class-router"));
+const agregar_usuario_1 = __importDefault(require("../../modules/agregar/agregar-usuario"));
+const CR = new class_router_1.default(), Router = CR.Router();
+Router.use(body_parser_1.default.json());
+Router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const datoUsuario = req.body, respUsuario = yield (0, agregar_usuario_1.default)(datoUsuario);
+        res.status(200).send({
+            data: respUsuario.data,
+            message: respUsuario.message,
+        });
+    }
+    catch (err) {
+        res.status(500).send({
+            data: null,
+            message: `Error en el registro de datos: ${err}`,
+        });
+    }
+}));
+exports.default = Router;

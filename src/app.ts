@@ -3,6 +3,10 @@ import routerInstance from "./class/class-router"
 import cors from 'cors'
 import { PORT } from './config/config-app'
 
+// Importación Servicios del modulo de Cliente
+import USUARIO from './services/servicio-usuario'
+import TRANSACCIONES from './services/servicio-usuario'
+
 // Importacio clase del Router
 const CS = new routerInstance()
 const servidor = CS.Servidor()
@@ -17,9 +21,7 @@ servidor.all( '/', ( _req:TRequest, res:TResponse ) => {
 })
 
 // Definicion de las rutas de las consultas entre APIs
-/*servidor.use( '/customer', CUSTOMER )
-servidor.use( '/prescription', PRESCRIPTION )
-servidor.use( '/user', USER )
-servidor.use('/token', VALIDATE_TOKEN)*/
+servidor.use( '/usuario', USUARIO )
+servidor.use( '/transaccion', TRANSACCIONES )
 
 servidor.listen( PORT, () => console.log(`Servidor corriendo en: http://localhost:${PORT}`) )

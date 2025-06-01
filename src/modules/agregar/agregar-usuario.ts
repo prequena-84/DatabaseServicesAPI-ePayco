@@ -3,7 +3,7 @@ import usuario from '../../db/models/usuario'
 
 import type { IUsuario, IUsuarioResp } from 'interfaces/IUsuario'
 
-export default async function usuarioAdd( datausuario:IUsuario ): Promise<IUsuarioResp> {
+export default async function agregarUsuario( datausuario:IUsuario ): Promise<IUsuarioResp> {
     try {
         await connectDB()
         return await usuario.createInstance(datausuario)
