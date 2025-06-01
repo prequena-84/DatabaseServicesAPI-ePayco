@@ -43,15 +43,15 @@ const transSchema = new Schema<ITransDocument> ({
 })
 
 // consulta todos los usuarios
-transSchema.statics.allTrans = async function (): Promise<ITransaccion[]> {
+transSchema.statics.todasLasTransacciones = async function (): Promise<ITransaccion[]> {
     return await this.find()
 }
 
-transSchema.statics.updateDataIdTrans = async function( id:TIdTransaccion, dataUpdate:ITransaccion ): Promise<ITrasResp> {
+transSchema.statics.actualizarDatoIdTransaccion = async function( id:TIdTransaccion, datoActualizado:ITransaccion ): Promise<ITrasResp> {
     try {
         const nuevaTransaccion = await this.findOneAndUpdate(
             {id},
-            dataUpdate,
+            datoActualizado,
             {new:true}
         )
 

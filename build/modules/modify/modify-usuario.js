@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getTransaccion;
+exports.default = getUsuario;
 const config_mongo_1 = require("../../config/config-mongo");
-const transaccion_1 = __importDefault(require("../../db/models/transaccion"));
-function getTransaccion(id, data) {
+const usuario_1 = __importDefault(require("../../db/models/usuario"));
+function getUsuario(id, data) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield (0, config_mongo_1.connectDB)();
-            return yield transaccion_1.default.actualizarDatoIdTransaccion(id, data);
+            return yield usuario_1.default.actualizarDatoIdUsuario(id, data);
         }
         catch (err) {
             return {

@@ -48,15 +48,15 @@ const transSchema = new mongoose_1.Schema({
     },
 });
 // consulta todos los usuarios
-transSchema.statics.allTrans = function () {
+transSchema.statics.todasLasTransacciones = function () {
     return __awaiter(this, void 0, void 0, function* () {
         return yield this.find();
     });
 };
-transSchema.statics.updateDataIdTrans = function (id, dataUpdate) {
+transSchema.statics.actualizarDatoIdTransaccion = function (id, datoActualizado) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const nuevaTransaccion = yield this.findOneAndUpdate({ id }, dataUpdate, { new: true });
+            const nuevaTransaccion = yield this.findOneAndUpdate({ id }, datoActualizado, { new: true });
             return {
                 data: nuevaTransaccion,
                 message: `Se actualizo los datos del usuario #${nuevaTransaccion.id} sastifactoriamente`,

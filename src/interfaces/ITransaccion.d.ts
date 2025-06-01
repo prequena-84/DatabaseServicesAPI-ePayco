@@ -19,9 +19,9 @@ interface ITrasResp {
 interface ITransDocument extends Document, ITransaccion{}
 
 interface ITransModel extends Model<ITransDocument> {
-    updateDataIdTrans(id:TIdTransaccion, dataUpdate:ITransaccion ): Promise<ITrasResp>;
-    allTrans(): Promise<ITransaccion[]>;
-    createInstance(dataTransaccion:ITransaccion): Promise<ITrasResp>;
+    actualizarDatoIdTransaccion(id:TIdTransaccion, datoActualizado:ITransaccion ): Promise<ITrasResp>;
+    todasLasTransacciones(): Promise<ITransaccion[]>;
+    createInstance(datoTransaccion:ITransaccion): Promise<ITrasResp>;
 }
 
 export {

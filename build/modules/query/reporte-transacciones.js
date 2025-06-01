@@ -12,19 +12,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getTransaccion;
+exports.default = reportCliente;
 const config_mongo_1 = require("../../config/config-mongo");
-const transaccion_1 = __importDefault(require("../../db/models/transaccion"));
-function getTransaccion(id, data) {
+const usuario_1 = __importDefault(require("../../db/models/usuario"));
+function reportCliente() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield (0, config_mongo_1.connectDB)();
-            return yield transaccion_1.default.actualizarDatoIdTransaccion(id, data);
+            const report = yield usuario_1.default.aggregate([
+                {
+                    $lookup: {
+                        from: "Transaccion", // Tabla a unificar
+                        localField: "user_id", // Campo de ID colección de Tabla a unificar
+                        foreignField: "id", // Campo de ID colección de clientes
+                        as: "Repote_Transacciones", // Nombre del campo donde se guardará la información combinada
+                    }
+                },
+                {
+                    $unwind: "$Usario"
+                },
+            ]);
+            return {
+                data: report,
+                message: 'Reporte de Trasacciones',
+            };
         }
         catch (err) {
             return {
                 data: null,
-                message: `Hubo un Error en la actualización del cliente: ${err}`,
+                message: 'Reporte de Cliente',
             };
         }
         finally {
