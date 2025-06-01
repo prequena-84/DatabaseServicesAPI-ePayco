@@ -13,35 +13,35 @@ const transSchema = new Schema<ITransDocument> ({
         type: String, 
         unique: true, 
         required: true,
-        default: nroTransaccion(),
     }, 
     usuario_doc :{ 
         type: String, 
-        unique: true, 
         required: true
     }, 
     tipo:{ 
         type: String, 
-        unique: true, 
+        unique: false, 
         required: true
     }, 
     monto:{ 
         type: Number, 
-        unique: true, 
+        unique: false, 
         required: true
     }, 
     status:{ 
         type: String, 
-        unique: true, 
+        unique: false, 
         required: true
     }, 
     token_confirmacion:{ 
         type: String, 
-        unique: true, 
+        unique: false,
+        default:'' ,
     }, 
     session_id:{ 
         type: String, 
-        unique: true, 
+        unique: false,
+        default:'',
     }, 
 })
 
@@ -78,8 +78,6 @@ transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion
             tipo, 
             monto, 
             status,
-            token_confirmacion, 
-            session_id, 
         }: ITransaccion = datoTransaccion
 
         const nuevaTransacion = new this({
@@ -87,9 +85,9 @@ transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion
             tipo, 
             monto, 
             status,
-            token_confirmacion, 
-            session_id 
         })
+
+        nuevaTransacion.id = nroTransaccion();
 
         await nuevaTransacion.save()
 
@@ -107,5 +105,5 @@ transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion
     }
 }
 
-const Transaccion = model<ITransDocument, ITransModel>('Transaccion', transSchema)
+const Transaccion = model<ITransDocument, ITransModel>('transaccion', transSchema)
 export default Transaccion

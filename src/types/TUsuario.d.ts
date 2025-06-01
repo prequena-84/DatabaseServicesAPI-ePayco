@@ -1,9 +1,7 @@
-type TIdusuario = string;
-type Tusuario = string;
-type TPassword = string;
+type TIdUsuario = string;
+type TUsuario = string;
 
 export {
-    TIdusuario,
-    Tusuario,
-    TPassword,
+    TIdUsuario,
+    TUsuario,
 }

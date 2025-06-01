@@ -2,8 +2,9 @@
 import routerInstancia from '../class/class-router'
 
 // Servicios VRouter Servicios
-import AGREGAR_TRANSACCION from '../routers/usuario/router-agregar'
-import ACTUALIZAR_TRANSACCION from '../routers/usuario/router.modificar'
+import AGREGAR_TRANSACCION from '../routers/transaccion/router-agregar'
+import ACTUALIZAR_TRANSACCION from '../routers/transaccion/router.modificar'
+import REPORTE_TRANSACCION from '../routers/reporte/router-reporte'
 
 // Importación de tipos
 import type { TRequest,TResponse } from 'types/TRouter'
@@ -26,5 +27,6 @@ Router.get('/', async( _req:TRequest, res:TResponse ): Promise<void> => {
 
 Router.use('/agregar', AGREGAR_TRANSACCION)
 Router.use('/actualizar',ACTUALIZAR_TRANSACCION)
+Router.use('/reporte', REPORTE_TRANSACCION)
 
 export default Router

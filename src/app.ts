@@ -5,7 +5,7 @@ import { PORT } from './config/config-app'
 
 // Importación Servicios del modulo de Cliente
 import USUARIO from './services/servicio-usuario'
-import TRANSACCIONES from './services/servicio-usuario'
+import TRANSACCIONES from './services/servicio-transaccion'
 
 // Importacio clase del Router
 const CS = new routerInstance()

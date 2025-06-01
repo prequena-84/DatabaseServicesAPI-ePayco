@@ -2,7 +2,7 @@
 import { Schema, model } from 'mongoose'
 
 // Importacion de Tipos o interfaces
-import type { TIdusuario } from 'types/TUsuario'
+import type { TIdUsuario } from 'types/TUsuario'
 import type { IUsuario, IUsuarioDocument, IUsuarioModel, IUsuarioResp  } from 'interfaces/IUsuario' 
 
 // creacion del esquema
@@ -14,7 +14,6 @@ const usuarioSchema = new Schema<IUsuarioDocument> ({
     }, 
     nombre:{ 
         type: String, 
-        unique: true, 
         required: true
     }, 
     email:{ 
@@ -29,8 +28,8 @@ const usuarioSchema = new Schema<IUsuarioDocument> ({
     }, 
     saldo:{ 
         type: Number, 
-        unique: true, 
-        required: true
+        required: false,
+        default:0,
     }, 
 })
 
@@ -39,7 +38,7 @@ usuarioSchema.statics.todosLosUsuario = async function (): Promise<IUsuario[]> {
     return await this.find()
 }
 
-usuarioSchema.statics.actualizarDatoIdUsuario = async function( documento:TIdusuario, datoActualizado:IUsuario ): Promise<IUsuarioResp> {
+usuarioSchema.statics.actualizarDatoIdUsuario = async function( documento:TIdUsuario, datoActualizado:IUsuario ): Promise<IUsuarioResp> {
     try {
         const nuevDatoUsuario = await this.findOneAndUpdate(
             {documento},
@@ -61,28 +60,27 @@ usuarioSchema.statics.actualizarDatoIdUsuario = async function( documento:TIdusu
 
 // Registro de Usuarios
 usuarioSchema.statics.createInstance = async function(datoUsuario:IUsuario): Promise<IUsuarioResp> {
+
     try {
         const {
             documento,
             nombre, 
             email, 
             celular, 
-            saldo, 
-        }: IUsuario  = datoUsuario
+        } = datoUsuario
 
         const nuevoUsuario = new this({
             documento,
             nombre, 
             email, 
-            celular, 
-            saldo, 
+            celular,
         })
 
         await nuevoUsuario.save()
 
         return {
             data:nuevoUsuario,
-            message:`Se registro el Usuario #${nuevoUsuario.nombre} sastifactoriamente`,
+            message:`Se registro el Usuario ${nuevoUsuario.nombre} sastifactoriamente`,
         }
     } catch(err) {
 

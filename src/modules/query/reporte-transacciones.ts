@@ -1,19 +1,21 @@
 import { connectDB, mongoose } from '../../config/config-mongo'
-import Usuario from '../../db/models/usuario'
+import Transaccion from '../../db/models/transaccion'
 
 import type {  IReporte, IReporteResp, } from 'interfaces/IReporte-transacciones'
 
 export default async function reportCliente(): Promise<IReporteResp> {
     try {
+
         await connectDB()
 
-        const report:IReporte[] = await Usuario.aggregate([
+        // queda pendiente definir la estructura del reporte
+        const report/*:IReporte[]*/ = await Transaccion.aggregate([
             {
                 $lookup: {
-                  from: "Transaccion",        // Tabla a unificar
-                  localField: "usuario_doc",      // Campo de ID colección de Tabla a unificar
-                  foreignField: "documento",         // Campo de ID colección de clientes
-                  as: "Repote_Transacciones", // Nombre del campo donde se guardará la información combinada
+                  from: "usuarios",        // Tabla a unificar
+                  localField: "usuario_doc",      // Campo en Usuario (tabla importada)
+                  foreignField: "documento",  // Campo en Transaccion
+                  as: "Usuario", // Nombre del campo donde se guardará la información combinada
                 }
             },
             {
@@ -26,9 +28,12 @@ export default async function reportCliente(): Promise<IReporteResp> {
             message: 'Reporte de Trasacciones',
         }
     } catch(err) {
+
+        console.error('Error en reporte', err);
+
         return {
             data:null,
-            message: 'Reporte de Cliente',
+            message: 'Error en Reporte de Trasacciones',
         }
     } finally {
         mongoose.connection.close()
