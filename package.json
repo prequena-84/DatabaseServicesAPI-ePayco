@@ -18,7 +18,7 @@
     "build": "tsc",
     "server": "node build/app.js",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "generateToken": "node -e \"console.log(require('crypto').randomBytes(3).toString('hex'))\""
+    "generadorNroTransaccion": "node -e \"console.log(require('crypto').randomBytes(10).toString('hex'))\""
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -31,7 +31,8 @@
     "http-errors": "^2.0.0",
     "mongoose": "^8.15.1",
     "morgan": "^1.10.0",
-    "server": "^1.0.41"
+    "server": "^1.0.41",
+    "server-epayco": "file:"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

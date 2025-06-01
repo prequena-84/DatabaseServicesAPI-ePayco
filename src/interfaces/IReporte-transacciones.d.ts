@@ -4,7 +4,7 @@ import { Document, Model } from 'mongoose'
 
 interface IReporte {
     id?:TIdTransaccion;
-    user_id?:TTransaccion;
+    usuario_doc?:TTransaccion;
     tipo?:'recarga' | 'pago';
     monto?:number;
     status?:'pendiente' | 'confirmada'

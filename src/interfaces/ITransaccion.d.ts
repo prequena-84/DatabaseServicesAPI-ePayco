@@ -1,9 +1,9 @@
-import type { TIdTransaccion,TTransaccion } from 'types/TTransaccion'
+import type { TIdTransaccion } from 'types/TTransaccion'
 import { Document, Model } from 'mongoose'
 
 interface ITransaccion {
     id:TIdTransaccion;
-    user_id:TTransaccion;
+    usuario_doc:string;
     tipo : 'recarga' | 'pago';
     monto : number;
     status : 'pendiente' | 'confirmada'

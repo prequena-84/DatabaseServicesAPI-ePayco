@@ -13,11 +13,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 // creacion del esquema
 const usuarioSchema = new mongoose_1.Schema({
-    id: {
-        type: String,
-        unique: true,
-        required: true
-    },
     documento: {
         type: String,
         unique: true,
@@ -50,10 +45,10 @@ usuarioSchema.statics.todosLosUsuario = function () {
         return yield this.find();
     });
 };
-usuarioSchema.statics.actualizarDatoIdUsuario = function (id, datoActualizado) {
+usuarioSchema.statics.actualizarDatoIdUsuario = function (documento, datoActualizado) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const nuevDatoUsuario = yield this.findOneAndUpdate({ id }, datoActualizado, { new: true });
+            const nuevDatoUsuario = yield this.findOneAndUpdate({ documento }, datoActualizado, { new: true });
             return {
                 data: nuevDatoUsuario,
                 message: `Se actualizo los datos del usuario #${nuevDatoUsuario.nombre} sastifactoriamente`,
@@ -71,9 +66,8 @@ usuarioSchema.statics.actualizarDatoIdUsuario = function (id, datoActualizado) {
 usuarioSchema.statics.createInstance = function (datoUsuario) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id, documento, nombre, email, celular, saldo, } = datoUsuario;
+            const { documento, nombre, email, celular, saldo, } = datoUsuario;
             const nuevoUsuario = new this({
-                id,
                 documento,
                 nombre,
                 email,

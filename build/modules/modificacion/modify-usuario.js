@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = getUsuario;
 const config_mongo_1 = require("../../config/config-mongo");
 const usuario_1 = __importDefault(require("../../db/models/usuario"));
-function getUsuario(id, data) {
+function getUsuario(documento, data) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield (0, config_mongo_1.connectDB)();
-            return yield usuario_1.default.actualizarDatoIdUsuario(id, data);
+            return yield usuario_1.default.actualizarDatoIdUsuario(documento, data);
         }
         catch (err) {
             return {

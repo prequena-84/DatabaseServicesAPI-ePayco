@@ -5,14 +5,17 @@ import { Schema, model } from 'mongoose'
 import type { TIdTransaccion } from 'types/TTransaccion'
 import type { ITransaccion, ITransDocument, ITransModel, ITrasResp  } from 'interfaces/ITransaccion' 
 
+import nroTransaccion from '../../functions/generador-nro-transaccion'
+
 // creacion del esquema
 const transSchema = new Schema<ITransDocument> ({
     id:{ 
-        type: Number, 
+        type: String, 
         unique: true, 
-        required: true
+        required: true,
+        default: nroTransaccion(),
     }, 
-    user_id :{ 
+    usuario_doc :{ 
         type: String, 
         unique: true, 
         required: true
@@ -71,8 +74,7 @@ transSchema.statics.actualizarDatoIdTransaccion = async function( id:TIdTransacc
 transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion): Promise<ITrasResp> {
     try {
         const {
-            id, 
-            user_id, 
+            usuario_doc, 
             tipo, 
             monto, 
             status,
@@ -81,8 +83,7 @@ transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion
         }: ITransaccion = datoTransaccion
 
         const nuevaTransacion = new this({
-            id, 
-            user_id, 
+            usuario_doc, 
             tipo, 
             monto, 
             status,

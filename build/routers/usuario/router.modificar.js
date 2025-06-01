@@ -19,7 +19,7 @@ const CR = new class_router_1.default(), Router = CR.Router();
 Router.use(body_parser_1.default.json());
 Router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const datoUsuario = req.body, responseUsuario = yield (0, modify_usuario_1.default)(datoUsuario.id, datoUsuario);
+        const datoUsuario = req.body, responseUsuario = yield (0, modify_usuario_1.default)(datoUsuario.documento, datoUsuario);
         res.status(200).send({
             data: responseUsuario.data,
             message: responseUsuario.message,

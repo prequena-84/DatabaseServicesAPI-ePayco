@@ -23,13 +23,13 @@ function reportCliente() {
                 {
                     $lookup: {
                         from: "Transaccion", // Tabla a unificar
-                        localField: "user_id", // Campo de ID colección de Tabla a unificar
-                        foreignField: "id", // Campo de ID colección de clientes
+                        localField: "usuario_doc", // Campo de ID colección de Tabla a unificar
+                        foreignField: "documento", // Campo de ID colección de clientes
                         as: "Repote_Transacciones", // Nombre del campo donde se guardará la información combinada
                     }
                 },
                 {
-                    $unwind: "$Usario"
+                    $unwind: "$Usuario"
                 },
             ]);
             return {

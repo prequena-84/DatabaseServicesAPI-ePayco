@@ -4,10 +4,10 @@ import Usuario from '../../db/models/usuario'
 import type { TIdusuario } from 'types/TUsuario'
 import type { IUsuario, IUsuarioResp } from 'interfaces/IUsuario'
 
-export default async function getUsuario( id:TIdusuario, data:IUsuario ): Promise<IUsuarioResp> {
+export default async function getUsuario( documento:TIdusuario, data:IUsuario ): Promise<IUsuarioResp> {
     try {
         await connectDB()
-        return await Usuario.actualizarDatoIdUsuario(id,data)
+        return await Usuario.actualizarDatoIdUsuario(documento,data)
     } catch(err) {
         return {
             data: null,

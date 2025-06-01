@@ -8,17 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 // Importacion componentes de mongoose
 const mongoose_1 = require("mongoose");
+const generador_nro_transaccion_1 = __importDefault(require("../../functions/generador-nro-transaccion"));
 // creacion del esquema
 const transSchema = new mongoose_1.Schema({
     id: {
-        type: Number,
+        type: String,
         unique: true,
-        required: true
+        required: true,
+        default: (0, generador_nro_transaccion_1.default)(),
     },
-    user_id: {
+    usuario_doc: {
         type: String,
         unique: true,
         required: true
@@ -74,10 +79,9 @@ transSchema.statics.actualizarDatoIdTransaccion = function (id, datoActualizado)
 transSchema.statics.createInstance = function (datoTransaccion) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id, user_id, tipo, monto, status, token_confirmacion, session_id, } = datoTransaccion;
+            const { usuario_doc, tipo, monto, status, token_confirmacion, session_id, } = datoTransaccion;
             const nuevaTransacion = new this({
-                id,
-                user_id,
+                usuario_doc,
                 tipo,
                 monto,
                 status,

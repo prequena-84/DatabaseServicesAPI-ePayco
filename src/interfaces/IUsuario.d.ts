@@ -2,7 +2,6 @@ import type { TIdUsuario,TUsuario } from 'types/Tusuario'
 import { Document, Model } from 'mongoose'
 
 interface IUsuario {
-    id?:TIdusuario;
     documento:Tusuario;
     nombre?:string;
     email?:string;
@@ -18,7 +17,7 @@ interface IUsuarioResp {
 interface IUsuarioDocument extends Document, IUsuario{}
 
 interface IUsuarioModel extends Model<IUsuarioDocument> {
-    actualizarDatoIdUsuario(id:TIdusuario, datoActualizado:IUsuario ): Promise<IUsuarioResp>;
+    actualizarDatoIdUsuario(documento:TIdusuario, datoActualizado:IUsuario ): Promise<IUsuarioResp>;
     todosLosUsuario(): Promise<IUsuario[]>;
     createInstance(datoUsuario:IUsuario): Promise<IUsuarioResp>;
 }

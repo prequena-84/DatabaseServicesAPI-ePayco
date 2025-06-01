@@ -7,11 +7,6 @@ import type { IUsuario, IUsuarioDocument, IUsuarioModel, IUsuarioResp  } from 'i
 
 // creacion del esquema
 const usuarioSchema = new Schema<IUsuarioDocument> ({
-    id:{ 
-        type: String, 
-        unique: true, 
-        required: true
-    }, 
     documento :{ 
         type: String, 
         unique: true, 
@@ -44,10 +39,10 @@ usuarioSchema.statics.todosLosUsuario = async function (): Promise<IUsuario[]> {
     return await this.find()
 }
 
-usuarioSchema.statics.actualizarDatoIdUsuario = async function( id:TIdusuario, datoActualizado:IUsuario ): Promise<IUsuarioResp> {
+usuarioSchema.statics.actualizarDatoIdUsuario = async function( documento:TIdusuario, datoActualizado:IUsuario ): Promise<IUsuarioResp> {
     try {
         const nuevDatoUsuario = await this.findOneAndUpdate(
-            {id},
+            {documento},
             datoActualizado,
             {new:true}
         )
@@ -68,7 +63,6 @@ usuarioSchema.statics.actualizarDatoIdUsuario = async function( id:TIdusuario, d
 usuarioSchema.statics.createInstance = async function(datoUsuario:IUsuario): Promise<IUsuarioResp> {
     try {
         const {
-            id,
             documento,
             nombre, 
             email, 
@@ -77,7 +71,6 @@ usuarioSchema.statics.createInstance = async function(datoUsuario:IUsuario): Pro
         }: IUsuario  = datoUsuario
 
         const nuevoUsuario = new this({
-            id,
             documento,
             nombre, 
             email, 
