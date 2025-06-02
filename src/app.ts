@@ -21,7 +21,7 @@ servidor.all( '/', ( _req:TRequest, res:TResponse ) => {
 })
 
 // Definicion de las rutas de las consultas entre APIs
-servidor.use( '/usuario', USUARIO )
-servidor.use( '/transaccion', TRANSACCIONES )
+servidor.use( '/API/V1/usuario', USUARIO )
+servidor.use( '/API/V1/transaccion', TRANSACCIONES )
 
 servidor.listen( PORT, () => console.log(`Servidor corriendo en: http://localhost:${PORT}`) )

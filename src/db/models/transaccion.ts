@@ -100,7 +100,7 @@ transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion
 
         return {
             data:null,
-            message:`Se presento el siguiente error al registrar al nuevo usuario: ${err}`,
+            message:`Se presento el siguiente error al registrar la nueva transaccion: ${err}`,
         }
     }
 }
