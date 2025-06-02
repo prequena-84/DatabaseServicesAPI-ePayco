@@ -4,6 +4,8 @@ import routerInstancia from '../class/class-router'
 // Servicios VRouter Servicios
 import AGREGAR_USUARIO from '../routers/usuario/router-agregar'
 import ACTUALIZAR_USUARIO from '../routers/usuario/router.modificar'
+import CONSULTA_USUARIO_DOCUMENTO from '../routers/consulta/router-consulta-doc-usuario'
+import CONSULTA_ALL_USUARIOS from "../routers/consulta/router-consulta-all-Usuario"
 
 // Importación de tipos
 import type { TRequest,TResponse } from 'types/TRouter'
@@ -26,5 +28,7 @@ Router.get('/', async( _req:TRequest, res:TResponse ): Promise<void> => {
 
 Router.use('/agregar', AGREGAR_USUARIO)
 Router.use('/actualizar', ACTUALIZAR_USUARIO)
+Router.use('/consulta', CONSULTA_ALL_USUARIOS)
+Router.use('/consulta-documento', CONSULTA_USUARIO_DOCUMENTO)
 
 export default Router

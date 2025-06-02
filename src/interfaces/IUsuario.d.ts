@@ -10,7 +10,7 @@ interface IUsuario {
 }
 
 interface IUsuarioResp {
-    data?:IUsuario | null;
+    data?:IUsuario | null ;
     message?:string | null;
 }
 
