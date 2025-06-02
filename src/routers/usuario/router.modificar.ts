@@ -28,4 +28,4 @@ Router.post('/', async ( req:TRequest, res:TResponse ): Promise<void> => {
     }
 })
 
-export default Router;
+export default Router

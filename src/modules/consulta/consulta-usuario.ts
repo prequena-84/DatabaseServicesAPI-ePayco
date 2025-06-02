@@ -9,7 +9,7 @@ export default async function consultaUsuario( documento:IUsuario ): Promise<IUs
         return {
             data: await Usuario.findOne( {documento:documento} ),
             message:'Se ha realizado la consulta sastifactoriamente'
-        };
+        }
 
     } catch(err) {
         return {

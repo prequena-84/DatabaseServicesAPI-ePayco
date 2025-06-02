@@ -1,7 +1,7 @@
-import { connectDB,mongoose } from "../../config/config-mongo"
+import { connectDB,mongoose } from '../../config/config-mongo'
 import bodyParser from 'body-parser'
 import routerInstancia from '../../class/class-router'
-import Usuario from "../../db/models/usuario"
+import Usuario from '../../db/models/usuario'
 
 import type { IUsuario } from 'interfaces/IUsuario'
 import type { TRequest,TResponse } from 'types/TRouter'

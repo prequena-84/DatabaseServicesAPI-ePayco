@@ -29,7 +29,7 @@ export default async function reportCliente(): Promise<IReporteResp> {
         }
     } catch(err) {
 
-        console.error('Error en reporte', err);
+        console.error('Error en reporte', err)
 
         return {
             data:null,

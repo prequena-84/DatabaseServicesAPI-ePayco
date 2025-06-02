@@ -87,7 +87,7 @@ transSchema.statics.createInstance = async function(datoTransaccion:ITransaccion
             status,
         })
 
-        nuevaTransacion.id = nroTransaccion();
+        nuevaTransacion.id = nroTransaccion()
 
         await nuevaTransacion.save()
 

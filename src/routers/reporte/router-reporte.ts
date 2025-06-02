@@ -11,7 +11,7 @@ Router.use(bodyParser.json())
 Router.get('/', async ( _req:TRequest, res:TResponse ): Promise<void> => {
     try {
 
-        const respTransaccion = await reportCliente();
+        const respTransaccion = await reportCliente()
 
         res.status(200).send({
             data:respTransaccion.data,
