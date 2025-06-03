@@ -22,7 +22,7 @@ Router.post('/', async ( req:TRequest, res:TResponse ): Promise<void> => {
         
         res.status(500).send({
             data:null,
-            message:`Error en la actualización de datos del cliente: ${err}`,
+            message:`Error en la actualización de datos del usuario: ${err}`,
         })
     }
 })

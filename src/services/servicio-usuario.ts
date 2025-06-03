@@ -17,7 +17,7 @@ const CR = new routerInstancia(), Router = CR.Router()
 Router.get('/', async( _req:TRequest, res:TResponse ): Promise<void> => {
     try {
         res.status(200).send({
-            message:'Bienvenido al Servicio de Clientes',
+            message:'Bienvenido al Servicio de Usuario',
         })
     } catch (err) {
         res.status(500).send({

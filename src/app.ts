@@ -17,7 +17,7 @@ servidor.use( cors() )
 import type { TRequest, TResponse } from 'types/TRouter' 
 
 servidor.all( '/', ( _req:TRequest, res:TResponse ) => {
-    res.send('Bienvenido a la API de Servicios de ePayco')
+    res.send('Bienvenido a la API de Servicios de Base de Datos de ePayco')
 })
 
 // Definicion de las rutas de las consultas entre APIs

@@ -38,10 +38,10 @@ const transSchema = new Schema<ITransDocument> ({
         unique: false,
         default:'' ,
     }, 
-    session_id:{ 
-        type: String, 
+    session_Exp:{ 
+        type: Number, 
         unique: false,
-        default:'',
+        default:0,
     }, 
 })
 
