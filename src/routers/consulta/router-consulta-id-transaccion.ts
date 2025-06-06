@@ -1,20 +1,15 @@
 import bodyParser from 'body-parser'
 import routerInstancia from '../../class/class-router'
 import consultaIdTransaccion from  '../../modules/consulta/consulta-transaccionID'
-
-import type { ITransaccion } from 'interfaces/ITransaccion'
 import type { TRequest,TResponse } from 'types/TRouter'
 
 const CR = new routerInstancia(), Router = CR.Router()
-
 Router.use(bodyParser.json())
-
 
 Router.post('/', async ( req:TRequest, res:TResponse ): Promise<void> => {
     try {
-
-        const datoIdTransaccion:ITransaccion = req.body.datoDocumento.idTransaccion
-        const response = await consultaIdTransaccion(datoIdTransaccion)
+        const { id } = req.body
+        const response = await consultaIdTransaccion(id)
 
         res.status(200).send({
             data:response.data,

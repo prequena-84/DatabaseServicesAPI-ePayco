@@ -11,8 +11,9 @@ Router.use(bodyParser.json())
 
 Router.post('/', async ( req:TRequest, res:TResponse ): Promise<void> => {
     try {
-        const datoUsuario:IUsuario = req.body.datoDocumento.documento
-        const response = await consultaUsuario(datoUsuario)
+        const 
+            { documento } = req.body, 
+            response = await consultaUsuario(documento)
 
         res.status(200).send({
             data:response.data,

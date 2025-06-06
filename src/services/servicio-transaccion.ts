@@ -27,7 +27,7 @@ Router.get('/', async( _req:TRequest, res:TResponse ): Promise<void> => {
 }) 
 
 Router.use('/agregar', AGREGAR_TRANSACCION)
-Router.use('/consulta-id-transaccion',CONSULTA_TRANSACCION)
+Router.use('/consulta-id-transaccion', CONSULTA_TRANSACCION)
 Router.use('/actualizar',ACTUALIZAR_TRANSACCION)
 Router.use('/reporte', REPORTE_TRANSACCION)
 

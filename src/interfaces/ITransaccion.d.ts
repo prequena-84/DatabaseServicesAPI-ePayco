@@ -2,7 +2,7 @@ import type { TIdTransaccion } from 'types/TTransaccion'
 import { Document, Model } from 'mongoose'
 
 interface ITransaccion {
-    id:TIdTransaccion;
+    id:TIdTransaccion ;
     usuario_doc:string;
     tipo : 'recarga' | 'pago';
     monto : number;
