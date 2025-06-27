@@ -5,7 +5,7 @@ interface IUser {
     name:TName;
     email:TEmail;
     phone:TPhone;
-    balance:TBalance;
+    balance?:TBalance;
 }
 
 export type {

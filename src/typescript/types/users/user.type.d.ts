@@ -2,7 +2,7 @@ type TDocument = string;
 type TName = string;
 type TEmail = string;
 type TPhone = string;
-type TBalance = number;
+type TBalance = number | null | undefined;
 
 export type {
     TDocument,
