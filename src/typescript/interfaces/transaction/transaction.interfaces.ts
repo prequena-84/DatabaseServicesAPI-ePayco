@@ -6,8 +6,8 @@ interface ITransaction {
     type:TTransaction;
     amount:TAmount;
     status:TStatus;
-    TokenConfirmation?:TTokenConfirmation;
-    SessionExp?:TSessionExp;
+    tokenConfirmation?:TTokenConfirmation;
+    sessionExp?:TSessionExp;
 }
 
 export type {

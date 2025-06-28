@@ -61,7 +61,7 @@ UserSchema.statics.updateIdUser = async function( document:TDocument, data:IUser
 
 UserSchema.statics.createInstance = async function(data:IUser): Promise<IResponseUser> {
     try {
-        const { document,name,email,phone } = data
+        const { document,name,email,phone }:IUser = data
         const newUser = new this({ document,name,email,phone })
         await newUser.save()
 
