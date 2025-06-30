@@ -4,7 +4,7 @@ import type { ITransaction } from 'src/typescript/interfaces/transaction/transac
 import type { TIdTransaction } from 'src/typescript/types/transaction/transaction.type';
 import type { IResponseTransaction } from 'src/typescript/interfaces/response/response-transaction';
 
-@Controller('transaction')
+@Controller('API/V1/transaction')
 export class TransactionController {
     constructor( public transactionService:TransactionService ) {};
 
@@ -32,6 +32,15 @@ export class TransactionController {
             message:response.message,
         };
     };
+    
+    @Patch(':id')
+    async setIdUser( @Param('id') id:TIdTransaction, @Body() body:ITransaction ): Promise<IResponseTransaction> {
+        const response = await this.transactionService.setTransactionID(id,body);
+        return {
+            data:response.data,
+            message:response.message,
+        };
+    };
 
     @Delete(':id')
     async deleteIdUser( @Param('id') id:TIdTransaction ): Promise<IResponseTransaction>  {
@@ -41,13 +50,4 @@ export class TransactionController {
             message:response.message,
         };
     };
-
-    @Patch(':id')
-    async setIdUser( @Param('id') id:TIdTransaction, @Body() body:ITransaction ): Promise<IResponseTransaction> {
-        const response = await this.transactionService.setTransactionID(id,body);
-        return {
-            data:response.data,
-            message:response.message,
-        };
-    };
-}
+};

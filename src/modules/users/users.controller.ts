@@ -34,18 +34,18 @@ export class UsersController {
         };
     };
 
-    @Delete(':id')
-    async deleteIdUser( @Param('id') id:TDocument ): Promise<IResponseUser>  {
-        const response = await this.usersService.deleteUser(id)
+    @Patch(':id')
+    async setIdUser( @Param('id') document:TDocument, @Body() body:IUser ): Promise<IResponseUser> {
+        const response = await this.usersService.setUserID(document,body);
         return {
             data:response.data,
             message:response.message,
         };
     };
 
-    @Patch(':id')
-    async setIdUser( @Param('id') document:TDocument, @Body() body:IUser ): Promise<IResponseUser> {
-        const response = await this.usersService.setUserID(document,body);
+    @Delete(':id')
+    async deleteIdUser( @Param('id') id:TDocument ): Promise<IResponseUser>  {
+        const response = await this.usersService.deleteUser(id)
         return {
             data:response.data,
             message:response.message,

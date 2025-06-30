@@ -2,7 +2,6 @@ import { Document, Model } from "mongoose"
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/typescript/types/transaction/transaction.type"
 import type { ITransaction } from "src/typescript/interfaces/transaction/transaction.interfaces"
-import type { IResponseTransaction } from "src/typescript/interfaces/response/response-transaction"
 
 @Schema()
 export class ModelsTransaction implements ITransaction {
@@ -37,13 +36,13 @@ export class ModelsTransaction implements ITransaction {
     status:TStatus
 
     @Prop({ 
-        required:true, 
+        required:false, 
         default:null
     })
     TokenConfirmation:TTokenConfirmation
 
     @Prop({ 
-        required:true, 
+        required:false, 
         default:0 
     })
     SessionExp:TSessionExp
@@ -57,52 +56,21 @@ export interface ITransactionModels extends Model<TransactionDocument> {
     createInstance(data:ITransaction): Promise<ITransaction>;
 }
 
-TransactionSchema.statics.allTransaction = async function():Promise<IResponseTransaction | null> {
-    try {
-        return {
-            data: await this.find(),
-            message: 'Se ha obtenido todos las Transacciones sastifactoriamente',
-        }
-    } catch(err) {
-        return {
-            data:null,
-            message:`Se presento el siguiente Error en la consulta de Transacciones: ${err}`,
-        }
-    }
+TransactionSchema.statics.allTransaction = async function():Promise<ITransaction[]> {
+    return await this.find();
 }
 
-TransactionSchema.statics.updateIdTransaction= async function( id:TIdTransaction, data:ITransaction ): Promise<IResponseTransaction | null> {
-    try {
-        const transactionData:ITransaction = await this.findOneAndUpdate({id}, data, {new:true})
-        return {
-            data: transactionData,
-            message:`Se actualizo los datos de la Transacción: ${transactionData.id} sastifactoriamente`,
-        }
-    } catch(err) {
-        return {
-            data:null,
-            message:`Se presento el siguiente Error en la actualizacion de datos: ${err}`,
-        }
-    }
+TransactionSchema.statics.updateIdTransaction= async function( id:TIdTransaction, data:ITransaction ):Promise<ITransaction> {
+    const transactionData:ITransaction = await this.findOneAndUpdate({id}, data, {new:true})
+    return transactionData;
 }
 
-TransactionSchema.statics.createInstance = async function( data:ITransaction ): Promise<IResponseTransaction> {
-    try {
-        const { userDocument,type,amount,status }: ITransaction = data
-        const newTransaction = new this({ userDocument,type,amount,status })
+TransactionSchema.statics.createInstance = async function( data:ITransaction ):Promise<ITransaction> {
+    const { id,userDocument,type,amount,status }: ITransaction = data
+    const newTransaction = new this({ id,userDocument,type,amount,status })
 
-        // Queda agregar los utils con esta función
-        //newTransaction.id = NTransaction();
-        await newTransaction.save()
-
-        return {
-            data:newTransaction,
-            message:`Se registro la Transacción #${newTransaction.id} sastifactoriamente`,
-        }
-    } catch(err) {
-        return {
-            data:null,
-            message:`Se presento el siguiente error: ${err}`,
-        }
-    }
-}
+    // Queda agregar los utils con esta función
+    //newTransaction.id = NTransaction();
+    await newTransaction.save()
+    return newTransaction;
+};

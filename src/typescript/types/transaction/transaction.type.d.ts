@@ -5,8 +5,8 @@ type TUserDocument = TDocument;
 type TTransaction = 'recarga' | 'pago';
 type TAmount = number;
 type TStatus = 'pendiente' | 'confirmada';
-type TTokenConfirmation = string | null;
-type TSessionExp = number | null;
+type TTokenConfirmation = string;
+type TSessionExp = number;
 
 export type {
     TIdTransaction,
