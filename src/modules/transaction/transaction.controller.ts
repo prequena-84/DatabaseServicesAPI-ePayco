@@ -24,6 +24,15 @@ export class TransactionController {
         };
     };
 
+    @Get('get/:id')
+    async getIdTransaction( @Param('id') id:TIdTransaction ):Promise<IResponseTransaction> {
+        const response =  await this.transactionService.getTransactionId(id);
+        return {
+            data:response.data,
+            message:response.message,
+        };
+    };
+
     @Post('add')
     async addTransaction( @Body() body:ITransaction ): Promise<IResponseTransaction> {
         const response = await this.transactionService.addTransaction(body);

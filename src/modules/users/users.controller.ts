@@ -25,6 +25,15 @@ export class UsersController {
         };
     };
 
+    @Get('get/:id')
+    async getIdUser( @Param('id') id:TDocument ):Promise<IResponseUser> {
+        const response = await this.usersService.getUserId(id);
+        return {
+            data:response.data,
+            message:response.message,
+        };
+    };
+
     @Post('add')
     async addUser( @Body() body:IUser ): Promise<IResponseUser> {
         const response = await this.usersService.addUser(body);

@@ -32,6 +32,14 @@ export class UsersService {
         };
     };
 
+    async getUserId (document:TDocument): Promise<IResponseUser> {
+        const response:IUser = await this.userModel.findOne({ document }) as IUser;
+        return {
+            data:response,
+            message:`Se obtenido los datos del Cliente: ${response.name} sastifactoriamente`,
+        };
+    };
+
     async setUserID ( document:TDocument, data:IUser ): Promise<IResponseUser> {
         try {
             const response:IUser = await this.userModel.updateIdUser(document,data);

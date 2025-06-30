@@ -31,6 +31,14 @@ export class TransactionService {
         };
     };
 
+    async getTransactionId (id:TIdTransaction): Promise<IResponseTransaction> {
+        const response:ITransaction = await this.transactionModel.findOne({ id }) as ITransaction;
+        return {
+            data:response,
+            message:`Se obtenido los datos de la transacción: ${response.id} sastifactoriamente`,
+        };
+    };
+
     async setTransactionID ( id:TIdTransaction, data:ITransaction ): Promise<IResponseTransaction> {
         try {
             const response:ITransaction = await this.transactionModel.updateIdTransaction(id,data);
