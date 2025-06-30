@@ -1,5 +1,6 @@
 import { Document, Model } from "mongoose"
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import numberTransaction from "src/common/utils/key.transaction.service"
 import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/typescript/types/transaction/transaction.type"
 import type { ITransaction } from "src/typescript/interfaces/transaction/transaction.interfaces"
 
@@ -66,11 +67,11 @@ TransactionSchema.statics.updateIdTransaction= async function( id:TIdTransaction
 }
 
 TransactionSchema.statics.createInstance = async function( data:ITransaction ):Promise<ITransaction> {
-    const { id,userDocument,type,amount,status }: ITransaction = data
-    const newTransaction = new this({ id,userDocument,type,amount,status })
+    const { userDocument,type,amount,status }: ITransaction = data
+    const newTransaction = new this({ userDocument,type,amount,status })
 
     // Queda agregar los utils con esta función
-    //newTransaction.id = NTransaction();
+    newTransaction.id = numberTransaction();
     await newTransaction.save()
     return newTransaction;
 };
