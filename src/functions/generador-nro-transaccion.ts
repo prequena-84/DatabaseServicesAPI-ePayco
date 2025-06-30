@@ -1,4 +1,4 @@
-import crypto from 'crypto'
+import crypto from "crypto"
 
 export default function nroTransaccion(): string {
     // randomBytes(3)
