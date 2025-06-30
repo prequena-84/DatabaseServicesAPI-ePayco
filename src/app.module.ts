@@ -4,20 +4,16 @@ import { AppService } from './app.service';
 import { ConexionDB } from './config/database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { TransactionModule } from './modules/transaction/transaction.module';
+import { ReportModule } from './modules/report/report.module';
 
 @Module({
   imports: [
     ConexionDB,
     UsersModule,
     TransactionModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {};
-
-/**
- * Queda pendiente crear el modulo de reporte
- * Queda pendiente agregar la funcion por users unico
- * Queda pendiente agregar la función por transaction unica
- */

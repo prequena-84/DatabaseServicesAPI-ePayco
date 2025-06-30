@@ -70,8 +70,8 @@ TransactionSchema.statics.createInstance = async function( data:ITransaction ):P
     const { userDocument,type,amount,status }: ITransaction = data
     const newTransaction = new this({ userDocument,type,amount,status })
 
-    // Queda agregar los utils con esta función
     newTransaction.id = numberTransaction();
+    
     await newTransaction.save()
     return newTransaction;
 };
