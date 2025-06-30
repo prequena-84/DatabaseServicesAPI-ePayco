@@ -61,4 +61,19 @@ export class UsersService {
             };
         };
     };
+
+    async deleteUser(document:TDocument): Promise<IResponseUser> {
+        try {
+            const response = await this.userModel.deleteOne({ document });
+            return {
+                data:null,
+                message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
+            };
+        } catch(err) {
+            return {
+                data:null,
+                message:`Se genero el siguiente error: ${err}`,
+            };
+        };
+    };
 };
