@@ -6,7 +6,7 @@ import { TransactionController } from './transaction.controller';
 
 @Module({
   imports:[
-    MongooseModule.forFeature([ {name:ModelsTransaction.name,schema:TransactionSchema} ])
+    MongooseModule.forFeature([ {name:ModelsTransaction.name, schema:TransactionSchema} ])
   ],
   providers: [TransactionService],
   controllers: [TransactionController],

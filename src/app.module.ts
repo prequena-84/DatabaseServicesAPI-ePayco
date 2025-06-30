@@ -15,3 +15,9 @@ import { TransactionModule } from './modules/transaction/transaction.module';
   providers: [AppService],
 })
 export class AppModule {};
+
+/**
+ * Queda pendiente crear el modulo de reporte
+ * Queda pendiente agregar la funcion por users unico
+ * Queda pendiente agregar la función por transaction unica
+ */

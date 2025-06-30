@@ -16,7 +16,7 @@ export class TransactionController {
     };
 
     @Get('get')
-    async getUsers(): Promise<IResponseTransaction> {
+    async getTransaction(): Promise<IResponseTransaction> {
         const response = await this.transactionService.getTransaction();
         return {
             data:response.data,
@@ -25,7 +25,7 @@ export class TransactionController {
     };
 
     @Post('add')
-    async addUser( @Body() body:ITransaction ): Promise<IResponseTransaction> {
+    async addTransaction( @Body() body:ITransaction ): Promise<IResponseTransaction> {
         const response = await this.transactionService.addTransaction(body);
         return {
             data:response.data,
@@ -34,7 +34,7 @@ export class TransactionController {
     };
     
     @Patch(':id')
-    async setIdUser( @Param('id') id:TIdTransaction, @Body() body:ITransaction ): Promise<IResponseTransaction> {
+    async setIdTransaction( @Param('id') id:TIdTransaction, @Body() body:ITransaction ): Promise<IResponseTransaction> {
         const response = await this.transactionService.setTransactionID(id,body);
         return {
             data:response.data,
@@ -43,7 +43,7 @@ export class TransactionController {
     };
 
     @Delete(':id')
-    async deleteIdUser( @Param('id') id:TIdTransaction ): Promise<IResponseTransaction>  {
+    async deleteIdTransaction( @Param('id') id:TIdTransaction ): Promise<IResponseTransaction>  {
         const response = await this.transactionService.deleteTransaction(id)
         return {
             data:response.data,
