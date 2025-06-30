@@ -53,8 +53,8 @@ export const TransactionSchema = SchemaFactory.createForClass(ModelsTransaction)
 
 export interface ITransactionModels extends Model<TransactionDocument> {
     allTransaction(): Promise<ITransaction[]>;
-    updateIdTransaction(document:TIdTransaction, data:ITransaction): Promise<IResponseTransaction>;
-    createInstance(data:ITransaction): Promise<IResponseTransaction>;
+    updateIdTransaction(document:TIdTransaction, data:ITransaction): Promise<ITransaction>;
+    createInstance(data:ITransaction): Promise<ITransaction>;
 }
 
 TransactionSchema.statics.allTransaction = async function():Promise<IResponseTransaction | null> {
