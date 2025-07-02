@@ -4,7 +4,7 @@ import type { ITransaction } from 'src/typescript/interfaces/transaction/transac
 import type { TIdTransaction } from 'src/typescript/types/transaction/transaction.type';
 import type { IResponseTransaction } from 'src/typescript/interfaces/response/response-transaction';
 
-@Controller('API/V1/transaction')
+@Controller('DatabaseServicesAPI/V1/transaction')
 export class TransactionController {
     constructor( public transactionService:TransactionService ) {};
 

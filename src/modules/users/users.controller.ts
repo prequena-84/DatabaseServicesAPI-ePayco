@@ -5,7 +5,7 @@ import type { IUser } from 'src/typescript/interfaces/user/user.interfaces';
 import type { TDocument } from 'src/typescript/types/users/user.type';
 import type { IResponseUser } from 'src/typescript/interfaces/response/response-user.interfaces';
 
-@Controller('API/V1/user')
+@Controller('DatabaseServicesAPI/V1/user')
 export class UsersController {
     constructor( public usersService: UsersService ) {};
 

@@ -40,13 +40,13 @@ export class ModelsTransaction implements ITransaction {
         required:false, 
         default:null
     })
-    TokenConfirmation:TTokenConfirmation
+    tokenConfirmation:TTokenConfirmation
 
     @Prop({ 
         required:false, 
         default:0 
     })
-    SessionExp:TSessionExp
+    sessionExp:TSessionExp
 }
 export type TransactionDocument = ModelsTransaction & Document
 export const TransactionSchema = SchemaFactory.createForClass(ModelsTransaction)
