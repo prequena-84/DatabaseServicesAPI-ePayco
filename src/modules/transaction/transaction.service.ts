@@ -17,17 +17,10 @@ export class TransactionService {
     };
 
     async getTransaction(): Promise<IResponseTransaction> {
-        try {
-            const data:ITransaction[] = await this.transactionModel.allTransaction()
-            return {
-                data: data,
-                message: 'Se ha obtenido todos los Usuarios sastifactoriamente',
-            };
-        } catch(err) {
-            return {
-                data: null,
-                message:`Se presento el siguiente Error en la actualizacion de datos: ${err}`,
-            };
+        const data:ITransaction[] = await this.transactionModel.allTransaction()
+        return {
+            data: data,
+            message: 'Se ha obtenido todos los Usuarios sastifactoriamente',
         };
     };
 
@@ -40,47 +33,26 @@ export class TransactionService {
     };
 
     async setTransactionID ( id:TIdTransaction, data:ITransaction ): Promise<IResponseTransaction> {
-        try {
-            const response:ITransaction = await this.transactionModel.updateIdTransaction(id,data);
-            return {
-                data: response,
-                message:`Se actualizo los datos de la transferencia: ${response.id} sastifactoriamente`,
-            };
-        } catch(err) {      
-            return {
-                data:null,
-                message:`Se presento el siguiente Error en la actualizacion de datos: ${err}`,
-            };
+        const response:ITransaction = await this.transactionModel.updateIdTransaction(id,data);
+        return {
+            data: response,
+            message:`Se actualizo los datos de la transferencia: ${response.id} sastifactoriamente`,
         };
     };
 
     async addTransaction(data:ITransaction): Promise<IResponseTransaction> {
-        try {
-            const response:ITransaction = await this.transactionModel.createInstance(data);
-            return {
-                data:response,
-                message:`Se registro la transacción #${response.id} sastifactoriamente`,
-            };
-        } catch(err) {
-            return {
-                data:null,
-                message:`Se presento el siguiente error al registrar la transacción: ${err}`,
-            };
+        const response:ITransaction = await this.transactionModel.createInstance(data);
+        return {
+            data:response,
+            message:`Se registro la transacción #${response.id} sastifactoriamente`,
         };
     };
 
     async deleteTransaction(id:TIdTransaction): Promise<IResponseTransaction> {
-        try {
-            const response = await this.transactionModel.deleteOne({ id });
-            return {
-                data:null,
-                message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
-            };
-        } catch(err) {
-            return {
-                data:null,
-                message:`Se genero el siguiente error: ${err}`,
-            };
+        const response = await this.transactionModel.deleteOne({ id });
+        return {
+            data:null,
+            message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
         };
     };
 };

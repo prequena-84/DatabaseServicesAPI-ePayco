@@ -18,17 +18,10 @@ export class UsersService {
     };
 
     async getUser(): Promise<IResponseUser> {
-        try {
-            const data:IUser[] = await this.userModel.allUsers();
-            return {
-                data: data,
-                message: 'Se ha obtenido todos los Usuarios sastifactoriamente',
-            };
-        } catch(err) {
-            return {
-                data: null,
-                message:`Se presento el siguiente Error en la actualizacion de datos: ${err}`,
-            };
+        const data:IUser[] = await this.userModel.allUsers();
+        return {
+            data: data,
+            message: 'Se ha obtenido todos los Usuarios sastifactoriamente',
         };
     };
 
@@ -41,47 +34,26 @@ export class UsersService {
     };
 
     async setUserID ( document:TDocument, data:IUser ): Promise<IResponseUser> {
-        try {
-            const response:IUser = await this.userModel.updateIdUser(document,data);
-            return {
-                data: response,
-                message:`Se actualizo los datos del usuario: ${response.name} sastifactoriamente`,
-            };
-        } catch(err) {      
-            return {
-                data:null,
-                message:`Se presento el siguiente Error en la actualizacion de datos: ${err}`,
-            };
+        const response:IUser = await this.userModel.updateIdUser(document,data);
+        return {
+            data: response,
+            message:`Se actualizo los datos del usuario: ${response.name} sastifactoriamente`,
         };
     };
 
     async addUser(data:IUser): Promise<IResponseUser> {
-        try {
-            const response:IUser = await this.userModel.createInstance(data);
-            return {
-                data:response,
-                message:`Se registro el Usuario ${response.name} sastifactoriamente`,
-            };
-        } catch(err) {
-            return {
-                data:null,
-                message:`Se presento el siguiente error al registrar al nuevo usuario: ${err}`,
-            };
+        const response:IUser = await this.userModel.createInstance(data);
+        return {
+            data:response,
+            message:`Se registro el Usuario ${response.name} sastifactoriamente`,
         };
     };
 
     async deleteUser(document:TDocument): Promise<IResponseUser> {
-        try {
-            const response = await this.userModel.deleteOne({ document });
-            return {
-                data:null,
-                message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
-            };
-        } catch(err) {
-            return {
-                data:null,
-                message:`Se genero el siguiente error: ${err}`,
-            };
+        const response = await this.userModel.deleteOne({ document });
+        return {
+            data:null,
+            message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
         };
     };
 };
