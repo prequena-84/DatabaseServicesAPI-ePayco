@@ -96,3 +96,17 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Instalación de las librerias
+Se necesita ejecutar el siguiente código en la consola y debe estar en la ruta raiz del proyecto npm install, y luego crear una carpeta en la misma raiz del proyecto llamada build, es donde se agregara los archivos de la compilación del proyecto, y para crear la compilación se debe ejecutar npm run build.
+
+## configuración de Mongoose 
+Se necesita tener el usuario, la key del clouster de mongo en atlas, el nombre del clouster, uri del mongo y se almacenara esa información en las siguientes variables de entorno  en el archivo .env
+
+USER_MONGODB = usuario de mongoose.
+KEY_MONGODB = contraseña secreta de mongoose.
+CLOUSTER_OPERATIONS = nombre de tu clouster.
+URI_MONGO = es la uri que concatenara las variables anteriores.
+
+## Configuración del Puerto donde va a escuchar el microservicio
+Se define en la variable de entorno PORT en el archivo .env, recuerda que si modificas este Endpoint lo debes actualizar en el microservicio que realiza la petición a este microservicio que sirve los datos de la Base de Datos de Mongoose.
