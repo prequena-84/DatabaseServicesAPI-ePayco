@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ModelsUsers, IUserModels } from './schemas/users.schema';
 
-import type { TDocument } from 'src/typescript/types/users/user.type';
-import type { IUser } from 'src/typescript/interfaces/user/user.interfaces';
+import type { TDocument } from 'src/modules/users/typescript/types/user.type';
+import type { IUser } from 'src/modules/users/typescript/interfaces/user.interfaces';
 import type { IResponseUser } from 'src/typescript/interfaces/response/response-user.interfaces';
 
 @Injectable()

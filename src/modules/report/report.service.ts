@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ModelsTransaction, ITransactionModels } from '../transaction/schemas/transactions.schemas';
-import { IReport, IResponseReport } from 'src/typescript/interfaces/response/response-report';
+import { IReport, IResponseReport } from 'src/modules/report/typescript/interfaces/response-report';
 
 @Injectable()
 export class ReportService {

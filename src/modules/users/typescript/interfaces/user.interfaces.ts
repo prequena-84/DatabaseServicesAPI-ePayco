@@ -1,4 +1,4 @@
-import type { TDocument,TName,TEmail,TPhone,TBalance } from "src/typescript/types/users/user.type";
+import type { TDocument,TName,TEmail,TPhone,TBalance } from "src/modules/users/typescript/types/user.type";
 
 interface IUser {
     document:TDocument;

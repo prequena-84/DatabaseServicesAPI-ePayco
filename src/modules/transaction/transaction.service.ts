@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ModelsTransaction, ITransactionModels } from './schemas/transactions.schemas';
-import type { TIdTransaction } from 'src/typescript/types/transaction/transaction.type';
-import type { ITransaction } from 'src/typescript/interfaces/transaction/transaction.interfaces';
-import type { IResponseTransaction } from 'src/typescript/interfaces/response/response-transaction';
+import type { TIdTransaction } from 'src/modules/transaction/typescript/types/transaction.type';
+import type { ITransaction } from 'src/modules/transaction/typescript/interfaces/transaction.interfaces';
+import type { IResponseTransaction } from 'src/modules/transaction/typescript/interfaces/response-transaction';
 
 @Injectable()
 export class TransactionService {

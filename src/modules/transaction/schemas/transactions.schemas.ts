@@ -1,8 +1,8 @@
 import { Document, Model } from "mongoose"
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import numberTransaction from "src/common/utils/key.transaction.service"
-import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/typescript/types/transaction/transaction.type"
-import type { ITransaction } from "src/typescript/interfaces/transaction/transaction.interfaces"
+import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/modules/transaction/typescript/types/transaction.type"
+import type { ITransaction } from "src/modules/transaction/typescript/interfaces/transaction.interfaces"
 
 @Schema()
 export class ModelsTransaction implements ITransaction {

@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body, Delete, Param, Patch } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
-import type { ITransaction } from 'src/typescript/interfaces/transaction/transaction.interfaces';
-import type { TIdTransaction } from 'src/typescript/types/transaction/transaction.type';
-import type { IResponseTransaction } from 'src/typescript/interfaces/response/response-transaction';
+import type { ITransaction } from 'src/modules/transaction/typescript/interfaces/transaction.interfaces';
+import type { TIdTransaction } from 'src/modules/transaction/typescript/types/transaction.type';
+import type { IResponseTransaction } from 'src/modules/transaction/typescript/interfaces/response-transaction';
 
 @Controller('DatabaseServicesAPI/V1/transaction')
 export class TransactionController {

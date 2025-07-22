@@ -1,7 +1,7 @@
 import { Document, Model } from "mongoose"
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import type { TDocument,TName,TEmail,TPhone,TBalance } from "src/typescript/types/users/user.type"
-import type { IUser } from "src/typescript/interfaces/user/user.interfaces"
+import type { TDocument,TName,TEmail,TPhone,TBalance } from "src/modules/users/typescript/types/user.type"
+import type { IUser } from "src/modules/users/typescript/interfaces/user.interfaces"
 
 @Schema()
 export class ModelsUsers implements IUser {

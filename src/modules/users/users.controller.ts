@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Delete, Param, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
 
-import type { IUser } from 'src/typescript/interfaces/user/user.interfaces';
-import type { TDocument } from 'src/typescript/types/users/user.type';
-import type { IResponseUser } from 'src/typescript/interfaces/response/response-user.interfaces';
+import type { IUser } from 'src/modules/users/typescript/interfaces/user.interfaces';
+import type { TDocument } from 'src/modules/users/typescript/types/user.type';
+import type { IResponseUser } from './typescript/interfaces/response-user.interfaces';
 
 @Controller('DatabaseServicesAPI/V1/user')
 export class UsersController {
