@@ -1,0 +1,62 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: userdev
+      MYSQL_PASSWORD: dev1234
+    ports:
+      - '3306:3306'
+    volumes:
+      ## - ./mysql-init:/docker-entrypoint-initdb.d  # scripts de inicialización de base de datos (No aplica para TypeORM)
+      - ./mysql-data:/var/lib/mysql               # persistencia de datos para el evaluador
+    networks:
+      - shared
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - shared
+
+  development:
+    container_name: "dev-ePayco"
+    image: dev
+    build:
+      context: .
+      target: development
+    env_file:
+      - .env.dev
+    ports:
+      - "3010:3010"
+    networks:
+      - shared
+    volumes:
+      - ./src:/src
+      - ./package*.json:/package*.json
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  production:
+    container_name: "prod-ePayco"
+    image: prod
+    build:
+      context: .
+      target: production
+    env_file:
+      - .env.prod
+    ports:
+      - "8010:8010"
+    networks:
+      - shared
+    restart: unless-stopped
+    depends_on:
+      - db
+
+networks:
+  shared:
+    driver: bridge
