@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { usersEntity } from '../../domain/users.entity';
 
-import type { IUser } from 'src/modules/users/interfaces/user.interfaces';
-import type { IResponseUser } from '../../interfaces/response-user.interfaces';
+import type { IUser, TResponseDelete } from 'src/modules/users/interfaces/user.interfaces';
 
 @Injectable()
 export class UsersRepository {
@@ -18,38 +17,26 @@ export class UsersRepository {
     };
 
     async findAllUsers(): Promise<IUser[]> {
-       return this.userRepository.update;  
+       return this.userRepository.find();  
     };
 
-    async findUserById (document:TDocument): Promise<IResponseUser> {
-        const response:IUser = await this.userModel.findOne({ document }) as IUser;
-        return {
-            data:response,
-            message:`Se obtenido los datos del Cliente: ${response.name} sastifactoriamente`,
-        };
+    async findUserById (document:number): Promise<IUser | null> {
+        return this.userRepository.findOneBy({ document });
     };
 
-    async updateUserID ( document:TDocument, data:IUser ): Promise<IResponseUser> {
-        const response:IUser = await this.userModel.updateIdUser(document,data);
-        return {
-            data: response,
-            message:`Se actualizo los datos del usuario: ${response.name} sastifactoriamente`,
-        };
+    async updateUserID ( document:number, data:Partial<IUser> ): Promise<IUser | null> {
+        await this.userRepository.update({document}, data );
+        const dataUser:IUser | null = await this.userRepository.findOneBy({document});
+        return dataUser;
     };
 
-    async addUser(data:IUser): Promise<IResponseUser> {
-        const response:IUser = await this.userModel.createInstance(data);
-        return {
-            data:response,
-            message:`Se registro el Usuario ${response.name} sastifactoriamente`,
-        };
+    async createUser(data:IUser): Promise<IUser> {
+        const newUser:IUser = this.userRepository.create(data);
+        return await this.userRepository.save(newUser);
     };
 
-    async deleteUser(document:TDocument): Promise<IResponseUser> {
-        const response = await this.userModel.deleteOne({ document });
-        return {
-            data:null,
-            message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
-        };
+    async deleteUser(document:number): Promise<TResponseDelete> {
+        const response:TResponseDelete = await this.userRepository.delete({ document });
+        return response;
     };
 };

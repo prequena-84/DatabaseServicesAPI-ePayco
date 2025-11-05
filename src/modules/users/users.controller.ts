@@ -30,37 +30,45 @@ export class UsersController {
 
     @Get('get/:id')
     async getIdUser( @Param('id') id:TDocument ):Promise<IResponseUser> {
-        const response = await this.usersService.getUserId(id);
+        const data = await this.usersService.getUserId(id);
+
+
+
         return {
-            data:response.data,
-            message:response.message,
+            data,
+            message:`Se obtenido los datos del Cliente: ${data.name} sastifactoriamente`,
         };
     };
 
     @Post('add')
     async addUser( @Body() body:IUser ): Promise<IResponseUser> {
-        const response = await this.usersService.addUser(body);
+        const data = await this.usersService.addUser(body);
+
         return {
-            data:response.data,
-            message:response.message,
+            data,
+            message:`Se registro el Usuario ${data.name} sastifactoriamente`,
         };
     };
 
     @Patch(':id')
     async setIdUser( @Param('id') document:TDocument, @Body() body:IUser ): Promise<IResponseUser> {
-        const response = await this.usersService.setUserID(document,body);
+        const data = await this.usersService.setUserID(document,body);
+
+
         return {
-            data:response.data,
-            message:response.message,
+            data,
+            message:`Se actualizo los datos del usuario: ${data.name} sastifactoriamente`,
         };
     };
 
     @Delete(':id')
     async deleteIdUser( @Param('id') id:TDocument ): Promise<IResponseUser>  {
-        const response = await this.usersService.deleteUser(id)
+        const response = await this.usersService.deleteUser(id);
+
+
         return {
-            data:response.data,
-            message:response.message,
+            data:null,
+            message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
         };
     };
 };

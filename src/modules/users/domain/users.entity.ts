@@ -15,6 +15,6 @@ export class usersEntity implements IUser {
     @Column({ type:'varchar', length:20 })
     phone:string;
 
-    @Column({ type:'decimal', precision:10, scale:2 })
-    balance:number;
+    @Column({ type:'decimal', precision:10, scale:2, nullable:true })
+    balance:number | null;
 };
