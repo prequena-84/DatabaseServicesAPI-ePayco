@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Delete, Param, Patch } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { UsersService } from './infrastructure/repositories/users.repositories';
 
-import type { IUser } from 'src/modules/users/typescript/interfaces/user.interfaces';
+import type { IUser } from 'src/modules/users/interfaces/user.interfaces';
 import type { TDocument } from 'src/modules/users/typescript/types/user.type';
-import type { IResponseUser } from './typescript/interfaces/response-user.interfaces';
+import type { IResponseUser } from './interfaces/response-user.interfaces';
 
 @Controller('DatabaseServicesAPI/V1/user')
 export class UsersController {
@@ -18,10 +18,13 @@ export class UsersController {
 
     @Get('get')
     async getUsers(): Promise<IResponseUser> {
-        const response = await this.usersService.getUser();
+        const data = await this.usersService.getUser();
+
+        
+
         return {
-            data:response.data,
-            message:response.message,
+            data,
+            message:'Se ha obtenido todos los Usuarios sastifactoriamente',
         };
     };
 

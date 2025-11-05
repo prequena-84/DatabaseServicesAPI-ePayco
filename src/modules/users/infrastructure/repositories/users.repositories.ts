@@ -1,31 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { ModelsUsers, IUserModels } from './schemas/users.schema';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { usersEntity } from '../../domain/users.entity';
 
-import type { TDocument } from 'src/modules/users/typescript/types/user.type';
-import type { IUser } from 'src/modules/users/typescript/interfaces/user.interfaces';
-import type { IResponseUser } from './typescript/interfaces/response-user.interfaces';
+import type { IUser } from 'src/modules/users/interfaces/user.interfaces';
+import type { IResponseUser } from '../../interfaces/response-user.interfaces';
 
 @Injectable()
-export class UsersService {
+export class UsersRepository {
     constructor( 
-        @InjectModel(ModelsUsers.name)
-        private readonly userModel:IUserModels
+        @InjectRepository(usersEntity)
+        private readonly userRepository:Repository<usersEntity>
     ) {};
 
     welcomeAPI( text:string ): string {
         return text;
     };
 
-    async getUser(): Promise<IResponseUser> {
-        const data:IUser[] = await this.userModel.allUsers();
-        return {
-            data: data,
-            message: 'Se ha obtenido todos los Usuarios sastifactoriamente',
-        };
+    async findAllUsers(): Promise<IUser[]> {
+       return this.userRepository.update;  
     };
 
-    async getUserId (document:TDocument): Promise<IResponseUser> {
+    async findUserById (document:TDocument): Promise<IResponseUser> {
         const response:IUser = await this.userModel.findOne({ document }) as IUser;
         return {
             data:response,
@@ -33,7 +29,7 @@ export class UsersService {
         };
     };
 
-    async setUserID ( document:TDocument, data:IUser ): Promise<IResponseUser> {
+    async updateUserID ( document:TDocument, data:IUser ): Promise<IResponseUser> {
         const response:IUser = await this.userModel.updateIdUser(document,data);
         return {
             data: response,

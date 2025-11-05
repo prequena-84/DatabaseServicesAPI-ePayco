@@ -1,5 +1,5 @@
 import type { ITransaction } from "../../../transaction/typescript/interfaces/transaction.interfaces";
-import type { IUser } from "../../../users/typescript/interfaces/user.interfaces";
+import type { IUser } from "../../../users/interfaces/user.interfaces";
 import type { TMessageText } from "src/common/utils/typescript/types/response.type";
 
 interface IReport extends ITransaction {
