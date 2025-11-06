@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { usersEntity } from '../../domain/users.entity';
-
-import type { IUser, TResponseDelete } from 'src/modules/users/interfaces/user.interfaces';
+import { UsersDTO } from '../../interfaces/dtos/create.users.dto';
+import type { IUser, TResponseDelete } from 'src/modules/users/interfaces/types/user.interfaces';
 
 @Injectable()
 export class UsersRepository {
@@ -30,8 +30,8 @@ export class UsersRepository {
         return dataUser;
     };
 
-    async createUser(data:IUser): Promise<IUser> {
-        const newUser:IUser = this.userRepository.create(data);
+    async createUser(dto:UsersDTO): Promise<IUser> {
+        const newUser:IUser = this.userRepository.create(dto);
         return await this.userRepository.save(newUser);
     };
 

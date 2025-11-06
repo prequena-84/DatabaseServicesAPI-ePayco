@@ -9,7 +9,10 @@ import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal:true }),
+    ConfigModule.forRoot({
+      isGlobal:true,
+      envFilePath: process.env.NODE_ENV === 'prod' ? '.env.prod' : '.env.dev',
+    }),
     ConexionDB,
     UsersModule,
     //TransactionModule,

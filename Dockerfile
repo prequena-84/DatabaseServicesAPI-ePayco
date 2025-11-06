@@ -1,5 +1,5 @@
 # Base stage con dependencias comunes
-FROM node:18.20.8-slim AS base
+FROM node:22.21.1-slim AS base
 WORKDIR /
 COPY package*.json ./
 COPY . .
