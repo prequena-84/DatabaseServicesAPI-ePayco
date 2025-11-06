@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Param, Patch } from '@nestjs/common';
+/*import { Controller, Get, Post, Body, Delete, Param, Patch } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import type { ITransaction } from 'src/modules/transaction/typescript/interfaces/transaction.interfaces';
 import type { TIdTransaction } from 'src/modules/transaction/typescript/types/transaction.type';
@@ -59,4 +59,4 @@ export class TransactionController {
             message:response.message,
         };
     };
-};
+};*/

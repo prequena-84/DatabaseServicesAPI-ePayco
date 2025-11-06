@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+/*import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ModelsTransaction, ITransactionModels } from './schemas/transactions.schemas';
 import type { TIdTransaction } from 'src/modules/transaction/typescript/types/transaction.type';
@@ -55,4 +55,4 @@ export class TransactionService {
             message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
         };
     };
-};
+};*/

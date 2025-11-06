@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+/*import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ModelsTransaction, ITransactionModels } from '../transaction/schemas/transactions.schemas';
 import { IReport, IResponseReport } from 'src/modules/report/typescript/interfaces/response-report';
@@ -34,4 +34,4 @@ export class ReportService {
             message:"Reporte Transacciones",
         };
     };
-};
+};*/

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+/*import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelsTransaction,TransactionSchema } from './schemas/transactions.schemas';
 import { TransactionService } from './transaction.service';
@@ -15,4 +15,4 @@ import { TransactionController } from './transaction.controller';
     MongooseModule,
   ],
 })
-export class TransactionModule {};
+export class TransactionModule {};*/

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+/*import { Controller, Get } from '@nestjs/common';
 import { ReportService } from './report.service';
 
 @Controller('DatabaseServicesAPI/V1/report')
@@ -20,4 +20,4 @@ export class ReportController {
             reponse:response.message,
         };
     };
-};
+};*/

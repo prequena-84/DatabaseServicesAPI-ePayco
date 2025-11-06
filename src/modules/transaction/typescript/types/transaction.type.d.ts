@@ -1,4 +1,4 @@
-import type { TDocument } from "../../../users/typescript/types/user.type";
+/*import type { TDocument } from "../../../users/typescript/types/user.type";
 
 type TIdTransaction = string;
 type TUserDocument = TDocument;
@@ -16,4 +16,4 @@ export type {
     TStatus,
     TTokenConfirmation,
     TSessionExp,
-}
+}*/

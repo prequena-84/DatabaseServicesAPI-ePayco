@@ -1,4 +1,4 @@
-import type { ITransaction } from "../../../transaction/typescript/interfaces/transaction.interfaces";
+/*import type { ITransaction } from "../../../transaction/typescript/interfaces/transaction.interfaces";
 import type { IUser } from "../../../users/interfaces/types/user.interfaces";
 import type { TMessageText } from "src/common/utils/typescript/types/response.type";
 
@@ -14,4 +14,4 @@ interface IResponseReport {
 export type {
     IReport,
     IResponseReport,
-}
+}*/

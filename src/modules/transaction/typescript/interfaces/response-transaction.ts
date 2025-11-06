@@ -1,4 +1,4 @@
-import type { ITransaction } from "./transaction.interfaces";
+/*import type { ITransaction } from "./transaction.interfaces";
 import type { TMessageText } from "src/common/utils/typescript/types/response.type";
 
 interface IResponseTransaction {
@@ -8,4 +8,4 @@ interface IResponseTransaction {
 
 export type {
     IResponseTransaction,
-}
+}*/

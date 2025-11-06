@@ -1,4 +1,4 @@
-import { Document, Model } from "mongoose"
+/*import { Document, Model } from "mongoose"
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import numberTransaction from "src/common/utils/key.transaction.service"
 import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/modules/transaction/typescript/types/transaction.type"
@@ -74,4 +74,4 @@ TransactionSchema.statics.createInstance = async function( data:ITransaction ):P
     
     await newTransaction.save()
     return newTransaction;
-};
+};*/

@@ -1,62 +1,65 @@
-services:
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: userdev
-      MYSQL_PASSWORD: dev1234
-    ports:
-      - '3306:3306'
-    volumes:
-      ## - ./mysql-init:/docker-entrypoint-initdb.d  # scripts de inicialización de base de datos (No aplica para TypeORM)
-      - ./mysql-data:/var/lib/mysql               # persistencia de datos para el evaluador
-    networks:
-      - shared
+  services:
+    db:
+      image: mysql:8.0
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: db_ePayco
+        MYSQL_USER: userdev
+        MYSQL_PASSWORD: dev1234
+        MYSQL_ROOT_HOST: "%"
+      command: --default-authentication-plugin=mysql_native_password
+      ports:
+        - '3306:3306'
+      volumes:
+        ## - ./mysql-init:/docker-entrypoint-initdb.d  # scripts de inicialización de base de datos (No aplica para TypeORM)
+        - ./mysql-data:/var/lib/mysql               # persistencia de datos para el evaluador
+      networks:
+        - ePayco-network
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-    networks:
-      - shared
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+      networks:
+        - ePayco-network
 
-  development:
-    container_name: "dev-ePayco"
-    image: dev
-    build:
-      context: .
-      target: development
-    env_file:
-      - .env.dev
-    ports:
-      - "3010:3010"
-    networks:
-      - shared
-    volumes:
-      - ./src:/src
-      - ./package*.json:/package*.json
-    restart: unless-stopped
-    depends_on:
-      - db
+    development:
+      container_name: "dev-ePayco"
+      image: dev
+      build:
+        context: .
+        target: development
+      env_file:
+        - .env.dev
+      ports:
+        - "3080:3080"
+      networks:
+        - ePayco-network
+      volumes:
+        - ./src:/src
+        - ./package*.json:/package*.json
+      restart: unless-stopped
+      depends_on:
+        - db
 
-  production:
-    container_name: "prod-ePayco"
-    image: prod
-    build:
-      context: .
-      target: production
-    env_file:
-      - .env.prod
-    ports:
-      - "8010:8010"
-    networks:
-      - shared
-    restart: unless-stopped
-    depends_on:
-      - db
+    production:
+      container_name: "prod-ePayco"
+      image: prod
+      build:
+        context: .
+        target: production
+      env_file:
+        - .env.prod
+      ports:
+        - "8080:8080"
+      networks:
+        - ePayco-network
+      restart: unless-stopped
+      depends_on:
+        - db
 
-networks:
-  shared:
-    driver: bridge
+  networks:
+    ePayco-network:
+      driver: bridge

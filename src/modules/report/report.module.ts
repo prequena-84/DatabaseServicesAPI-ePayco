@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+/*import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelsTransaction, TransactionSchema } from '../transaction/schemas/transactions.schemas';
 import { ReportService } from './report.service';
@@ -12,4 +12,4 @@ import { ReportController } from './report.controller';
   controllers: [ReportController],
   exports:[ReportService],
 })
-export class ReportModule {};
+export class ReportModule {};*/

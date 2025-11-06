@@ -1,4 +1,4 @@
-import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/modules/transaction/typescript/types/transaction.type";
+/*import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation, TSessionExp } from "src/modules/transaction/typescript/types/transaction.type";
 
 interface ITransaction {
     id:TIdTransaction;
@@ -12,4 +12,4 @@ interface ITransaction {
 
 export type {
     ITransaction,
-}
+}*/
