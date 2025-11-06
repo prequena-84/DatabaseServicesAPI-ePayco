@@ -10,7 +10,6 @@ import {
     BadRequestException,  
     ConflictException,
     InternalServerErrorException,
-    ParseIntPipe
 } from '@nestjs/common';
 import { UsersRepository } from '../../infrastructure/repositories/users.repositories';
 import type { IResponseUser } from '../types/response-user.interfaces';
