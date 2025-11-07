@@ -1,58 +1,43 @@
-/*import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { ModelsTransaction, ITransactionModels } from './schemas/transactions.schemas';
-import type { TIdTransaction } from 'src/modules/transaction/typescript/types/transaction.type';
-import type { ITransaction } from 'src/modules/transaction/typescript/interfaces/transaction.interfaces';
-import type { IResponseTransaction } from 'src/modules/transaction/typescript/interfaces/response-transaction';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TransactionsEntity } from '../../domain/transactions.entity';
+import { TransactionsDTO } from '../../interfaces/dtos/create.transactions.dto';
+
+import type { ITransaction, TResponseDelete } from '../../interfaces/types/transactions.interfaces';
 
 @Injectable()
 export class TransactionService {
     constructor(
-        @InjectModel(ModelsTransaction.name)
-        private readonly transactionModel:ITransactionModels
+        @InjectRepository(TransactionsEntity)
+        private readonly transactionRepository:Repository<TransactionsEntity>
     ) {};
 
     welcomeAPI(text:string):string {
         return text;
     };
 
-    async getTransaction(): Promise<IResponseTransaction> {
-        const data:ITransaction[] = await this.transactionModel.allTransaction()
-        return {
-            data: data,
-            message: 'Se ha obtenido todos los Usuarios sastifactoriamente',
-        };
+    async findAllTransactions(): Promise<ITransaction[]> {
+        return this.transactionRepository.find();
     };
 
-    async getTransactionId (id:TIdTransaction): Promise<IResponseTransaction> {
-        const response:ITransaction = await this.transactionModel.findOne({ id }) as ITransaction;
-        return {
-            data:response,
-            message:`Se obtenido los datos de la transacción: ${response.id} sastifactoriamente`,
-        };
+    async findTransactionById (id:string): Promise<ITransaction | null> {
+        return this.transactionRepository.findOneBy({ id });
     };
 
-    async setTransactionID ( id:TIdTransaction, data:ITransaction ): Promise<IResponseTransaction> {
-        const response:ITransaction = await this.transactionModel.updateIdTransaction(id,data);
-        return {
-            data: response,
-            message:`Se actualizo los datos de la transferencia: ${response.id} sastifactoriamente`,
-        };
+    async updateTransactionId ( id:string, data:Partial<ITransaction> ): Promise<ITransaction | null> {
+        await this.transactionRepository.update({id}, data);
+        const dataTransaction:ITransaction | null = await this.transactionRepository.findOneBy({ id });
+        return dataTransaction;
     };
 
-    async addTransaction(data:ITransaction): Promise<IResponseTransaction> {
-        const response:ITransaction = await this.transactionModel.createInstance(data);
-        return {
-            data:response,
-            message:`Se registro la transacción #${response.id} sastifactoriamente`,
-        };
+    async createTransaction(dto:TransactionsDTO): Promise<ITransaction> {
+        const newTransaction:ITransaction = this.transactionRepository.create(dto);
+        return await this.transactionRepository.save(newTransaction);
     };
 
-    async deleteTransaction(id:TIdTransaction): Promise<IResponseTransaction> {
-        const response = await this.transactionModel.deleteOne({ id });
-        return {
-            data:null,
-            message:response.acknowledged ? `Eliminación correcta, Documentos afectados ${response.deletedCount}` : `Eliminación incorrecta, Documentos afectados ${response.deletedCount}`,
-        };
+    async deleteTransaction(id:string): Promise<TResponseDelete> {
+        const response:TResponseDelete = await this.transactionRepository.delete({ id });
+        return response;
     };
-};*/
+};

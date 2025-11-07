@@ -2,7 +2,7 @@ import type { IUser } from "src/modules/users/interfaces/types/users.interfaces"
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity({ name:'users' })
-export class usersEntity implements IUser {
+export class UsersEntity implements IUser {
     @PrimaryGeneratedColumn()
     document:number;
 

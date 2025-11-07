@@ -1,4 +1,6 @@
-export interface ITransaction {
+import type { DeleteResult } from "typeorm";
+
+interface ITransaction {
     id: string;
     document: number;
     type: 'recarga' | 'pago';
@@ -6,4 +8,11 @@ export interface ITransaction {
     status: 'pendiente' | 'confirmada';
     tokenConfirmation?: string | null;
     sessionExp?: number | null;
+}
+
+type TResponseDelete = DeleteResult;
+
+export type {
+    ITransaction,
+    TResponseDelete,
 }

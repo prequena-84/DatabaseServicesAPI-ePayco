@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { usersEntity } from '../../domain/users.entity';
+
+import { UsersEntity } from '../../domain/users.entity';
 import { UsersDTO } from '../../interfaces/dtos/create.users.dto';
 import type { IUser, TResponseDelete } from 'src/modules/users/interfaces/types/users.interfaces';
 
 @Injectable()
 export class UsersRepository {
     constructor( 
-        @InjectRepository(usersEntity)
-        private readonly userRepository:Repository<usersEntity>
+        @InjectRepository(UsersEntity)
+        private readonly userRepository:Repository<UsersEntity>
     ) {};
 
     welcomeAPI( text:string ): string {
