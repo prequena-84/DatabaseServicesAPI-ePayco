@@ -1,62 +1,104 @@
-/*import { Controller, Get, Post, Body, Delete, Param, Patch } from '@nestjs/common';
-import { TransactionService } from './transaction.service';
-import type { ITransaction } from 'src/modules/transaction/typescript/interfaces/transaction.interfaces';
-import type { TIdTransaction } from 'src/modules/transaction/typescript/types/transaction.type';
-import type { IResponseTransaction } from 'src/modules/transaction/typescript/interfaces/response-transaction';
+import { 
+    Controller,
+    Get,
+    Post,
+    Body,
+    Delete,
+    Param,
+    Patch,
+    NotFoundException,
+    BadRequestException,  
+    ConflictException,
+    InternalServerErrorException,
+    HttpException,
+} from '@nestjs/common';
+import { TransactionRepository } from '../../infrastructure/repositories/transactions.repository';
+import { TransactionsDTO } from '../dtos/create.transactions.dto';
+import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
+import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 
-@Controller('DatabaseServicesAPI/V1/transaction')
+import type { IResponseTransaction } from '../types/response-transactions.interfaces';
+
+@Controller('api/v1/services/db/transactions')
 export class TransactionController {
-    constructor( public transactionService:TransactionService ) {};
+    constructor( public transactionsRepository:TransactionRepository ) {};
 
-    @Get('/')
+    @Get('welcome')
     getWelcome() {
         return {
-            message:this.transactionService.welcomeAPI("Bienvenido al Servicio de CRUD de Transacciones"),
+            message:this.transactionsRepository.welcomeAPI("Bienvenido al Servicio de Transacciones"),
         };
     };
 
-    @Get('get')
+    @Get()
     async getTransaction(): Promise<IResponseTransaction> {
-        const response = await this.transactionService.getTransaction();
+        const data = await this.transactionsRepository.findAllTransactions();
+        if (!data.length) throw new NotFoundException('No hay transacciones registrados');
+
         return {
-            data:response.data,
-            message:response.message,
+            data,
+            message:'Consulta generada',
         };
     };
 
-    @Get('get/:id')
-    async getIdTransaction( @Param('id') id:TIdTransaction ):Promise<IResponseTransaction> {
-        const response =  await this.transactionService.getTransactionId(id);
+    @Get(':id')
+    async getIdTransaction( @Param('id', DecodeBase64Params) id:string ):Promise<IResponseTransaction> {
+        const data =  await this.transactionsRepository.findTransactionById(id);
+        if (!data ) throw new NotFoundException(`No se encontro la transacción con el id ${id}`);
+
         return {
-            data:response.data,
-            message:response.message,
+            data,
+            message:`Datos de la transacción: ${data.id}`,
         };
     };
 
-    @Post('add')
-    async addTransaction( @Body() body:ITransaction ): Promise<IResponseTransaction> {
-        const response = await this.transactionService.addTransaction(body);
-        return {
-            data:response.data,
-            message:response.message,
+    @Post()
+    async addTransaction( @Body( new DecodeBase64Pipe() ) dto:TransactionsDTO ): Promise<IResponseTransaction> {
+        try {
+            const data = await this.transactionsRepository.createTransaction(dto);
+            return {
+                data,
+                message:`Transacción #${data.id} creada.`,
+            };
+        } catch(err) {
+            if ( err instanceof HttpException ) throw err;
+            console.error(err);
+            throw new BadRequestException(`No se creo la transacción`);
         };
     };
     
     @Patch(':id')
-    async setIdTransaction( @Param('id') id:TIdTransaction, @Body() body:ITransaction ): Promise<IResponseTransaction> {
-        const response = await this.transactionService.setTransactionID(id,body);
-        return {
-            data:response.data,
-            message:response.message,
+    async setIdTransaction( @Param('id', DecodeBase64Params) id:string, @Body( new DecodeBase64Pipe() ) dto:TransactionsDTO ): Promise<IResponseTransaction> {
+        try {            
+            const validateTransaction = await this.transactionsRepository.findTransactionById(id)
+            if ( !validateTransaction ) throw new NotFoundException('Transacción no encontrada');
+
+            const data = await this.transactionsRepository.updateTransactionId(id, dto);
+            return {
+                data,
+                message:`Transacción ${data?.id} actualizada`,
+            };
+
+        } catch(err) {
+            if ( err instanceof HttpException ) throw err;
+            throw new InternalServerErrorException(`No se actualizo la transacción`);
         };
     };
 
     @Delete(':id')
-    async deleteIdTransaction( @Param('id') id:TIdTransaction ): Promise<IResponseTransaction>  {
-        const response = await this.transactionService.deleteTransaction(id)
-        return {
-            data:response.data,
-            message:response.message,
+    async deleteIdTransaction( @Param('id', DecodeBase64Params) id:string ): Promise<IResponseTransaction>  {
+        try {
+            const validateUser = await this.transactionsRepository.findTransactionById(id)
+            if ( !validateUser ) throw new NotFoundException('Transacción no encontrada');
+
+            const data = await this.transactionsRepository.deleteTransaction(id);
+            return {
+                data:data.raw,
+                message:data.affected ? `Eliminación correcta, Documentos afectados ${data.affected}` : `Eliminación incorrecta, Documentos afectados ${data.affected}`,
+            };
+        } catch(err) {
+            if ( err instanceof HttpException ) throw err;
+            throw new InternalServerErrorException(`No se pudo eliminar la transacción`);
         };
     };
-};*/
+};

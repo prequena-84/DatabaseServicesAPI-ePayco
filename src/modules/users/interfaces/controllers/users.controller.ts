@@ -71,7 +71,7 @@ export class UsersController {
     };
 
     @Patch(':id')
-    async setIdUser( @Param('id', DecodeBase64Params ) id:number, @Body(  new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
+    async setIdUser( @Param('id', DecodeBase64Params ) id:number, @Body( new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
         try {
             const validateUser = await this.usersRepository.findUserById(id);
             if ( !validateUser ) throw new NotFoundException('Cliente no encontrado');
@@ -92,7 +92,7 @@ export class UsersController {
     async deleteIdUser( @Param('id', DecodeBase64Params) id:number ): Promise<IResponseUser>  {
         try {
             const validateUser = await this.usersRepository.findUserById(id);
-            if ( !validateUser ) throw new NotFoundException('Usuario no encontrado');
+            if ( !validateUser ) throw new NotFoundException('Cliente no encontrado');
 
             const data = await this.usersRepository.deleteUser(id);
             return {

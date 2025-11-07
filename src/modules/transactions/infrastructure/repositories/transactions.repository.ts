@@ -7,7 +7,7 @@ import { TransactionsDTO } from '../../interfaces/dtos/create.transactions.dto';
 import type { ITransaction, TResponseDelete } from '../../interfaces/types/transactions.interfaces';
 
 @Injectable()
-export class TransactionService {
+export class TransactionRepository {
     constructor(
         @InjectRepository(TransactionsEntity)
         private readonly transactionRepository:Repository<TransactionsEntity>
@@ -21,7 +21,7 @@ export class TransactionService {
         return this.transactionRepository.find();
     };
 
-    async findTransactionById (id:string): Promise<ITransaction | null> {
+    async findTransactionById (id:string | undefined): Promise<ITransaction | null> {
         return this.transactionRepository.findOneBy({ id });
     };
 
