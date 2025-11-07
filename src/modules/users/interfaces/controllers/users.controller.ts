@@ -17,7 +17,7 @@ import { UsersDTO } from '../dtos/create.users.dto';
 import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
 import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 
-import type { IResponseUser } from '../types/response-user.interfaces';
+import type { IResponseUser } from '../types/response-users.interfaces';
 
 @Controller('api/v1/services/db/users')
 export class UsersController {

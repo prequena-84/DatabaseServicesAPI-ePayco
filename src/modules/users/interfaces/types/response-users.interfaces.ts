@@ -1,4 +1,4 @@
-import type { IUser, TResponseDelete } from "./user.interfaces";
+import type { IUser, TResponseDelete } from "./users.interfaces";
 
 export interface IResponseUser {
     data?: IUser | IUser[] | null | undefined;

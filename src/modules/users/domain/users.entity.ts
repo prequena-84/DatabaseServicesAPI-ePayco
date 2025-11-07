@@ -1,4 +1,4 @@
-import type { IUser } from "src/modules/users/interfaces/types/user.interfaces"
+import type { IUser } from "src/modules/users/interfaces/types/users.interfaces"
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity({ name:'users' })
