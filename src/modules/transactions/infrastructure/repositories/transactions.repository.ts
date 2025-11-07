@@ -7,7 +7,7 @@ import { TransactionsDTO } from '../../interfaces/dtos/create.transactions.dto';
 import type { ITransaction, TResponseDelete } from '../../interfaces/types/transactions.interfaces';
 
 @Injectable()
-export class TransactionRepository {
+export class TransactionsRepository {
     constructor(
         @InjectRepository(TransactionsEntity)
         private readonly transactionRepository:Repository<TransactionsEntity>

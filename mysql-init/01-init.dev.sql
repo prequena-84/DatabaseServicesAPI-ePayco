@@ -16,3 +16,13 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(20) NOT NULL,
     balance DECIMAL(10,2) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS transactions ( 
+    id VARCHAR(20) NOT NULL PRIMARY KEY,
+    document INT NOT NULL,
+    `type` VARCHAR(10) NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    `status` VARCHAR(10) NOT NULL,
+    tokenConfirmation VARCHAR(500),
+    sessionExp INT,
+);

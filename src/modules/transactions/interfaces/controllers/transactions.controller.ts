@@ -12,7 +12,7 @@ import {
     InternalServerErrorException,
     HttpException,
 } from '@nestjs/common';
-import { TransactionRepository } from '../../infrastructure/repositories/transactions.repository';
+import { TransactionsRepository } from '../../infrastructure/repositories/transactions.repository';
 import { TransactionsDTO } from '../dtos/create.transactions.dto';
 import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
 import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
@@ -20,8 +20,8 @@ import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 import type { IResponseTransaction } from '../types/response-transactions.interfaces';
 
 @Controller('api/v1/services/db/transactions')
-export class TransactionController {
-    constructor( public transactionsRepository:TransactionRepository ) {};
+export class TransactionsController {
+    constructor( public transactionsRepository:TransactionsRepository ) {};
 
     @Get('welcome')
     getWelcome() {

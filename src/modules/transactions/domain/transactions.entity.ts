@@ -19,7 +19,7 @@ export class TransactionsEntity implements ITransaction {
     @Column({ type:'varchar', length:10 })
     type:'recarga' | 'pago';
 
-    @Column({ type:'decimal', precision:10, scale:2, nullable:true })
+    @Column({ type:'decimal', precision:10, scale:2 })
     amount:number;
 
     @Column({ type:'varchar', length:10 })
