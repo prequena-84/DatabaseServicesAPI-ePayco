@@ -17,18 +17,18 @@ import { UsersDTO } from '../dtos/create.users.dto';
 import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
 import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 
-@Controller('DatabaseServicesAPI/V1/user')
+@Controller('api/v1/services/db/users')
 export class UsersController {
     constructor( public usersRepository: UsersRepository ) {};
 
-    @Get('/')
+    @Get()
     getWelcome() {
         return {
             message:this.usersRepository.welcomeAPI("Bienvenido al Servicio de CRUD de Usuarios"),
         };
     };
 
-    @Get('get')
+    @Get()
     async getUsers(): Promise<IResponseUser> {
         const data = await this.usersRepository.findAllUsers();
         if (!data.length) throw new NotFoundException('No se han encontrado registro de usuarios existentes');
@@ -39,7 +39,7 @@ export class UsersController {
         };
     };
 
-    @Get('get/:id')
+    @Get(':id')
     async getIdUser( @Param('id', DecodeBase64Params) id:number ):Promise<IResponseUser> {
         const data = await this.usersRepository.findUserById(id);
         if (!data ) throw new NotFoundException(`No se han encontrado el cliente con el registro ${id}`);
@@ -50,7 +50,7 @@ export class UsersController {
         };
     };
 
-    @Post('add')
+    @Post(':id')
     async addUser( @Body( new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
         try {
             const validateUser = await this.getIdUser(dto.document)
