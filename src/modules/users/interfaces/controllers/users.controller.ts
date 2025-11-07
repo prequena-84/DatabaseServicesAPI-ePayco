@@ -21,7 +21,8 @@ import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 export class UsersController {
     constructor( public usersRepository: UsersRepository ) {};
 
-    @Get()
+    // OK funciona bien
+    @Get('Welcome')
     getWelcome() {
         return {
             message:this.usersRepository.welcomeAPI("Bienvenido al Servicio de CRUD de Usuarios"),
@@ -31,6 +32,10 @@ export class UsersController {
     @Get()
     async getUsers(): Promise<IResponseUser> {
         const data = await this.usersRepository.findAllUsers();
+
+        console.log('validacion del data: ', data)
+
+
         if (!data.length) throw new NotFoundException('No se han encontrado registro de usuarios existentes');
 
         return {
@@ -50,7 +55,7 @@ export class UsersController {
         };
     };
 
-    @Post(':id')
+    @Post()
     async addUser( @Body( new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
         try {
             const validateUser = await this.getIdUser(dto.document)
@@ -62,6 +67,7 @@ export class UsersController {
                 message:`Se registro el Usuario ${data.name} sastifactoriamente`,
             };
         } catch(err) {
+            console.error(err)
             throw new BadRequestException(`No se pudo crear el usuario, por favor revise los datos`);
         };
     };
