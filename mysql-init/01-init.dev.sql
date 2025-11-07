@@ -24,5 +24,5 @@ CREATE TABLE IF NOT EXISTS transactions (
     amount DECIMAL(10,2) NOT NULL,
     `status` VARCHAR(10) NOT NULL,
     tokenConfirmation VARCHAR(500),
-    sessionExp INT,
-);
+    sessionExp INT
+)
