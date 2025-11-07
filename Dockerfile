@@ -9,7 +9,7 @@ FROM base AS development
 ENV NODE_ENV=development
 RUN npm install
 COPY .env.dev .env
-EXPOSE 3080 
+EXPOSE 3010 
 CMD ["npx", "nest", "start", "--watch"]
 
 # Stage de builder para producción
@@ -31,5 +31,5 @@ ENV NODE_ENV=production
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
-EXPOSE 8080
+EXPOSE 8010
 CMD ["npx", "node", "build/main.js"]

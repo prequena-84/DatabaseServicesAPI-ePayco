@@ -1,2 +1,18 @@
-Quede en crear la base de datos desde este script para ambos escenarios.
+-- Crear bases de datos
+CREATE DATABASE IF NOT EXISTS db_development_ePayco;
 
+-- Permiso de usuario
+GRANT ALL PRIVILEGES ON db_development_ePayco.* TO 'userdev'@'%';
+FLUSH PRIVILEGES;
+
+-- --- Tablas para Development ---
+USE db_development_ePayco;
+
+-- --- Tablas para Development ---
+CREATE TABLE IF NOT EXISTS users ( 
+    document INT NOT NULL PRIMARY KEY,
+    `name` VARCHAR(250) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    balance DECIMAL(10,2) NOT NULL
+);

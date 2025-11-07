@@ -10,89 +10,88 @@ import {
     BadRequestException,  
     ConflictException,
     InternalServerErrorException,
+    HttpException,
 } from '@nestjs/common';
 import { UsersRepository } from '../../infrastructure/repositories/users.repositories';
-import type { IResponseUser } from '../types/response-user.interfaces';
 import { UsersDTO } from '../dtos/create.users.dto';
 import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
 import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
+
+import type { IResponseUser } from '../types/response-user.interfaces';
 
 @Controller('api/v1/services/db/users')
 export class UsersController {
     constructor( public usersRepository: UsersRepository ) {};
 
-    // OK funciona bien
     @Get('Welcome')
     getWelcome() {
         return {
-            message:this.usersRepository.welcomeAPI("Bienvenido al Servicio de CRUD de Usuarios"),
+            message:this.usersRepository.welcomeAPI("Bienvenido al Servicio Clientes"),
         };
     };
 
     @Get()
     async getUsers(): Promise<IResponseUser> {
         const data = await this.usersRepository.findAllUsers();
-
-        console.log('validacion del data: ', data)
-
-
-        if (!data.length) throw new NotFoundException('No se han encontrado registro de usuarios existentes');
+        if (!data.length) throw new NotFoundException('No hay clientes registrados');
 
         return {
             data,
-            message:'Se ha obtenido todos los Usuarios sastifactoriamente',
+            message:'Consulta generada',
         };
     };
 
     @Get(':id')
     async getIdUser( @Param('id', DecodeBase64Params) id:number ):Promise<IResponseUser> {
         const data = await this.usersRepository.findUserById(id);
-        if (!data ) throw new NotFoundException(`No se han encontrado el cliente con el registro ${id}`);
+        if (!data ) throw new NotFoundException(`No se encontro el Cliente con el id ${id}`);
 
         return {
             data,
-            message:`Se obtenido los datos del Cliente: ${data.name} sastifactoriamente`,
+            message:`Datos del cliente: ${data.name}`,
         };
     };
 
     @Post()
     async addUser( @Body( new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
         try {
-            const validateUser = await this.getIdUser(dto.document)
-            if (validateUser) throw new ConflictException(`El usuario ya se encuentra creado, por favor revise la información`);
+            const validateUser = await this.usersRepository.findUserById(dto.document);
+            if (validateUser) throw new ConflictException(`Cliente ya registrado`);
 
             const data = await this.usersRepository.createUser(dto);
             return {
                 data,
-                message:`Se registro el Usuario ${data.name} sastifactoriamente`,
+                message:`Cliente ${data.name} creado.`,
             };
         } catch(err) {
-            console.error(err)
-            throw new BadRequestException(`No se pudo crear el usuario, por favor revise los datos`);
+            if ( err instanceof HttpException ) throw err;
+            console.error(err);
+            throw new BadRequestException(`No se creo el Cliente`);
         };
     };
 
     @Patch(':id')
-    async setIdUser( @Param('id', DecodeBase64Params) id:number, @Body() dto:UsersDTO ): Promise<IResponseUser> {
+    async setIdUser( @Param('id', DecodeBase64Params ) id:number, @Body(  new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
         try {
-            const validateUser = await this.getIdUser(id);
-            if ( !validateUser ) throw new NotFoundException('Usuario no encontrado');
+            const validateUser = await this.usersRepository.findUserById(id);
+            if ( !validateUser ) throw new NotFoundException('Cliente no encontrado');
 
             const data = await this.usersRepository.updateUserID(id, dto);
             return {
                 data,
-                message:`Se actualizo los datos del usuario: ${data?.name} sastifactoriamente`,
+                message:`Cliente ${data?.name} actualizado`,
             };
 
         } catch(err) {
-            throw new BadRequestException('No se pudo actualizar el usuario')
+            if ( err instanceof HttpException ) throw err;
+            throw new InternalServerErrorException(`No se actualizo el cliente`);
         };
     };
 
     @Delete(':id')
     async deleteIdUser( @Param('id', DecodeBase64Params) id:number ): Promise<IResponseUser>  {
         try {
-            const validateUser = await this.getIdUser(id);
+            const validateUser = await this.usersRepository.findUserById(id);
             if ( !validateUser ) throw new NotFoundException('Usuario no encontrado');
 
             const data = await this.usersRepository.deleteUser(id);
@@ -101,7 +100,8 @@ export class UsersController {
                 message:data.affected ? `Eliminación correcta, Documentos afectados ${data.affected}` : `Eliminación incorrecta, Documentos afectados ${data.affected}`,
             };
         } catch(err) {
-            throw new InternalServerErrorException('No se pudo eliminar el usuario, por favor revise los datos ingresados');
+            if ( err instanceof HttpException ) throw err;
+            throw new InternalServerErrorException(`No se pudo eliminar el cliente`);
         };
     };
 };
