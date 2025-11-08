@@ -1,5 +1,6 @@
-import { Entity, PrimaryColumn, Column, BeforeInsert } from "typeorm";
+import { Entity, PrimaryColumn, Column, BeforeInsert, ManyToOne, JoinColumn } from "typeorm";
 import numberTransaction from "src/common/utils/key.transaction.service";
+import { UsersEntity } from "src/modules/users/domain/users.entity";
 
 import type { ITransaction } from "../interfaces/types/transactions.interfaces";
 
@@ -30,4 +31,8 @@ export class TransactionsEntity implements ITransaction {
 
     @Column({ type:'int', nullable:true })
     sessionExp?:number | null;
+
+    @ManyToOne(() => UsersEntity, user => user.transactions)
+    @JoinColumn({ name:'document', referencedColumnName: 'document'})
+    user: UsersEntity;
 };

@@ -19,7 +19,7 @@ import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 
 import type { IResponseUser } from '../types/response-users.interfaces';
 
-@Controller('api/v1/services/db/users')
+@Controller('api/v1/service/db/users')
 export class UsersController {
     constructor( public usersRepository: UsersRepository ) {};
 

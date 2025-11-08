@@ -1,5 +1,8 @@
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { TransactionsEntity } from "src/modules/transactions/domain/transactions.entity";
+
 import type { IUser } from "src/modules/users/interfaces/types/users.interfaces"
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+
 
 @Entity({ name:'users' })
 export class UsersEntity implements IUser {
@@ -17,4 +20,7 @@ export class UsersEntity implements IUser {
 
     @Column({ type:'decimal', precision:10, scale:2, nullable:true })
     balance:number | null;
+
+    @OneToMany(() => TransactionsEntity, transaction => transaction.user)
+    transactions:TransactionsEntity[];
 };

@@ -19,7 +19,7 @@ import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
 
 import type { IResponseTransaction } from '../types/response-transactions.interfaces';
 
-@Controller('api/v1/services/db/transactions')
+@Controller('api/v1/service/db/transactions')
 export class TransactionsController {
     constructor( public transactionsRepository:TransactionsRepository ) {};
 
@@ -33,7 +33,7 @@ export class TransactionsController {
     @Get()
     async getTransaction(): Promise<IResponseTransaction> {
         const data = await this.transactionsRepository.findAllTransactions();
-        if (!data.length) throw new NotFoundException('No hay transacciones registrados');
+        if (!data.length) throw new NotFoundException('No hay transacciones registradas');
 
         return {
             data,

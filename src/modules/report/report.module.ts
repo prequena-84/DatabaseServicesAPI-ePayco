@@ -1,15 +1,18 @@
-/*import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ModelsTransaction, TransactionSchema } from '../transaction/schemas/transactions.schemas';
-import { ReportService } from './report.service';
-import { ReportController } from './report.controller';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TransactionsEntity } from '../transactions/domain/transactions.entity';
+import { ReportRepository } from './infrastructure/repositories/report.repository';
+import { ReportController } from './interfaces/controller/report.controller';
 
 @Module({
   imports:[
-    MongooseModule.forFeature([{ name: ModelsTransaction.name, schema:TransactionSchema }])
+    TypeOrmModule.forFeature([TransactionsEntity]),
   ],
-  providers: [ReportService],
+  providers: [ReportRepository],
   controllers: [ReportController],
-  exports:[ReportService],
+  exports:[
+    TypeOrmModule,
+    ReportRepository,
+  ],
 })
-export class ReportModule {};*/
+export class ReportModule {};

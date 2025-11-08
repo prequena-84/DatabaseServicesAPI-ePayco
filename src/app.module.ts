@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ConexionDB } from './infrastructure/database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { TransactionModule } from './modules/transactions/transactions.module';
-//import { ReportModule } from './modules/report/report.module';
+import { ReportModule } from './modules/report/report.module';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { TransactionModule } from './modules/transactions/transactions.module';
     ConexionDB,
     UsersModule,
     TransactionModule,
-    //ReportModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
