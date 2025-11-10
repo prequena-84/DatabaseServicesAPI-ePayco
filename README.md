@@ -44,19 +44,6 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
@@ -67,46 +54,30 @@ If you are looking for a cloud-based platform to deploy your NestJS application,
 $ npm install -g @nestjs/mau
 $ mau deploy
 ```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
 ## Instalación de las librerias
 Se necesita ejecutar el siguiente código en la consola y debe estar en la ruta raiz del proyecto npm install, y luego crear una carpeta en la misma raiz del proyecto llamada build, es donde se agregara los archivos de la compilación del proyecto, y para crear la compilación se debe ejecutar npm run build.
 
-## configuración de Mongoose 
-Se necesita tener el usuario, la key del clouster de mongo en atlas, el nombre del clouster, uri del mongo y se almacenara esa información en las siguientes variables de entorno  en el archivo .env
+## Configuración MySQL
+Ya el contenedor Docker contiene la imagen de Adminer que contiene la base de datos para los Stage de production y Development, con el usuario: "userdev" y password:"dev1234" en el localhost:8080.
 
-USER_MONGODB = usuario de mongoose.
-KEY_MONGODB = contraseña secreta de mongoose.
-CLOUSTER_OPERATIONS = nombre de tu clouster.
-URI_MONGO = es la uri que concatenara las variables anteriores.
+## Configuración del Docker.
+Para desplegar los Stage de Docker:
 
-## Configuración del Puerto donde va a escuchar el microservicio
-Se define en la variable de entorno PORT en el archivo .env, recuerda que si modificas este Endpoint lo debes actualizar en el microservicio que realiza la petición a este microservicio que sirve los datos de la Base de Datos de Mongoose.
+- Base de Datos
+docker compose up --build db
+
+- Adminer
+docker compose up --build adminer
+
+- Development
+docker compose up --build development
+
+- production
+docker compose up --build production
+
+- All 
+docket compose up --build
+
+Con esta configuración el primer microservicio estara operativo para recibir los datos de registro de cliente y transacciones serializado en Base64 y tambien genera el reporte de clientes.
+
+Para las pruebas puedes ingresar datos desde el Adminer con sentencias SQL.
