@@ -8,14 +8,13 @@ import {
     Patch,
     NotFoundException,
     BadRequestException,  
-    ConflictException,
     InternalServerErrorException,
     HttpException,
 } from '@nestjs/common';
 import { TransactionsRepository } from '../../infrastructure/repositories/transactions.repository';
 import { TransactionsDTO } from '../dtos/create.transactions.dto';
 import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
-import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
+import { DecodeBase64StringParams } from 'src/common/pipes/decode-base64-string.params.pipe';
 
 import type { IResponseTransaction } from '../types/response-transactions.interfaces';
 
@@ -42,7 +41,7 @@ export class TransactionsController {
     };
 
     @Get(':id')
-    async getIdTransaction( @Param('id', DecodeBase64Params) id:string ):Promise<IResponseTransaction> {
+    async getIdTransaction( @Param('id', DecodeBase64StringParams) id:string ):Promise<IResponseTransaction> {
         const data =  await this.transactionsRepository.findTransactionById(id);
         if (!data ) throw new NotFoundException(`No se encontro la transacción con el id ${id}`);
 
@@ -68,7 +67,7 @@ export class TransactionsController {
     };
     
     @Patch(':id')
-    async setIdTransaction( @Param('id', DecodeBase64Params) id:string, @Body( new DecodeBase64Pipe() ) dto:TransactionsDTO ): Promise<IResponseTransaction> {
+    async setIdTransaction( @Param('id', DecodeBase64StringParams) id:string, @Body( new DecodeBase64Pipe() ) dto:TransactionsDTO ): Promise<IResponseTransaction> {
         try {            
             const validateTransaction = await this.transactionsRepository.findTransactionById(id)
             if ( !validateTransaction ) throw new NotFoundException('Transacción no encontrada');
@@ -86,7 +85,7 @@ export class TransactionsController {
     };
 
     @Delete(':id')
-    async deleteIdTransaction( @Param('id', DecodeBase64Params) id:string ): Promise<IResponseTransaction>  {
+    async deleteIdTransaction( @Param('id', DecodeBase64StringParams) id:string ): Promise<IResponseTransaction>  {
         try {
             const validateUser = await this.transactionsRepository.findTransactionById(id)
             if ( !validateUser ) throw new NotFoundException('Transacción no encontrada');

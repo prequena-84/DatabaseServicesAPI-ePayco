@@ -16,7 +16,7 @@ export class ReportController {
         };
     };
 
-    @Get('transaction')
+    @Get()
     async getTransactionReport() {
         const data = await this.transactionRepository.reportTransactions();
         if (!data.length) throw new NotFoundException('No hay transacciones registradas');

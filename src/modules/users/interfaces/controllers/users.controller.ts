@@ -15,7 +15,7 @@ import {
 import { UsersRepository } from '../../infrastructure/repositories/users.repositories';
 import { UsersDTO } from '../dtos/create.users.dto';
 import { DecodeBase64Pipe } from 'src/common/pipes/decode-base64.pipe';
-import { DecodeBase64Params } from 'src/common/pipes/decode-base64.params.pipe';
+import { DecodeBase64NumberParams } from 'src/common/pipes/decode-base64-number.params.pipe';
 
 import type { IResponseUser } from '../types/response-users.interfaces';
 
@@ -41,10 +41,10 @@ export class UsersController {
         };
     };
 
-    @Get(':id')
-    async getIdUser( @Param('id', DecodeBase64Params) id:number ):Promise<IResponseUser> {
-        const data = await this.usersRepository.findUserById(id);
-        if (!data ) throw new NotFoundException(`No se encontro el Cliente con el id ${id}`);
+    @Get(':document')
+    async getIdUser( @Param('document', DecodeBase64NumberParams) document:number ):Promise<IResponseUser> {
+        const data = await this.usersRepository.findUserById(document);
+        if (!data ) throw new NotFoundException(`No se encontro el Cliente con el id ${document}`);
 
         return {
             data,
@@ -70,13 +70,13 @@ export class UsersController {
         };
     };
 
-    @Patch(':id')
-    async setIdUser( @Param('id', DecodeBase64Params ) id:number, @Body( new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
+    @Patch(':document')
+    async setIdUser( @Param('document', DecodeBase64NumberParams ) document:number, @Body( new DecodeBase64Pipe() ) dto:UsersDTO ): Promise<IResponseUser> {
         try {
-            const validateUser = await this.usersRepository.findUserById(id);
+            const validateUser = await this.usersRepository.findUserById(document);
             if ( !validateUser ) throw new NotFoundException('Cliente no encontrado');
 
-            const data = await this.usersRepository.updateUserID(id, dto);
+            const data = await this.usersRepository.updateUserID(document, dto);
             return {
                 data,
                 message:`Cliente ${data?.name} actualizado`,
@@ -88,13 +88,13 @@ export class UsersController {
         };
     };
 
-    @Delete(':id')
-    async deleteIdUser( @Param('id', DecodeBase64Params) id:number ): Promise<IResponseUser>  {
+    @Delete(':document')
+    async deleteIdUser( @Param('document', DecodeBase64NumberParams) document:number ): Promise<IResponseUser>  {
         try {
-            const validateUser = await this.usersRepository.findUserById(id);
+            const validateUser = await this.usersRepository.findUserById(document);
             if ( !validateUser ) throw new NotFoundException('Cliente no encontrado');
 
-            const data = await this.usersRepository.deleteUser(id);
+            const data = await this.usersRepository.deleteUser(document);
             return {
                 data:data.raw,
                 message:data.affected ? `Eliminación correcta, Documentos afectados ${data.affected}` : `Eliminación incorrecta, Documentos afectados ${data.affected}`,
