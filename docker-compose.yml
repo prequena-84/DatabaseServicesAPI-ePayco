@@ -62,4 +62,5 @@
 
   networks:
     ePayco-network:
-      driver: bridge
+      ##driver: bridge ## se sutituye con el "docker network create ePayco-network" para crear una red permante bridde y para eliminarla es 'ddocker network rm ePayco-network'
+      external: true
