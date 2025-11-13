@@ -3,8 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TransactionsEntity } from 'src/modules/transactions/domain/transactions.entity';
 
-import type { IResponseReport } from '../../interfaces/types/response-report';
-
 @Injectable()
 export class ReportRepository {
     constructor( 

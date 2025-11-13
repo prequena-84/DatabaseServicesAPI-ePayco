@@ -18,12 +18,19 @@ export class ReportController {
 
     @Get()
     async getTransactionReport() {
-        const data = await this.transactionRepository.reportTransactions();
-        if (!data.length) throw new NotFoundException('No hay transacciones registradas');
+        try {
+            const data = await this.transactionRepository.reportTransactions();
+            if (!data.length) throw new NotFoundException('No hay transacciones registradas');
 
-        return {
-            data,
-            reponse:'Se descargo el reporte de transacciones',
-        };
+            return {
+                data,
+                reponse:'Se descargo el reporte de transacciones',
+            };
+        } catch(err) {
+            return {
+                data:[],
+                reponse:'No hay transacciones registrada',
+            };
+        }
     };
 };

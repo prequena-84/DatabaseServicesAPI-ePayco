@@ -30,13 +30,22 @@ export class TransactionsController {
     };
 
     @Get()
-    async getTransaction(): Promise<IResponseTransaction> {
-        const data = await this.transactionsRepository.findAllTransactions();
-        if (!data.length) throw new NotFoundException('No hay transacciones registradas');
+    async getTransaction(): Promise<IResponseTransaction | undefined> {
+        try {
+            const data = await this.transactionsRepository.findAllTransactions();
+            if (!data.length) throw new NotFoundException('No hay transacciones registradas');
 
-        return {
-            data,
-            message:'Consulta generada',
+            return {
+                data,
+                message:'Consulta generada',
+            };
+        } catch(err) {
+            if ( err.mensage ) {
+                return {
+                    data:[],
+                    message:err.message,
+               };
+            };
         };
     };
 
