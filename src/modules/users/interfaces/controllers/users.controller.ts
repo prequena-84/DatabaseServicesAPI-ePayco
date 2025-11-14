@@ -33,11 +33,10 @@ export class UsersController {
     @Get()
     async getUsers(): Promise<IResponseUser> {
         const data = await this.usersRepository.findAllUsers();
-        if (!data.length) throw new NotFoundException('No hay clientes registrados');
 
         return {
             data,
-            message:'Consulta generada',
+            message:data.length ? 'Consulta generada' : 'No hay clientes registrados',
         };
     };
 
